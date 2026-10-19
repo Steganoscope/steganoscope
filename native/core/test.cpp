@@ -6,9 +6,9 @@
 #include <random>
 #include <sstream>
 
-#include "qretina.hpp"
+#include "steganoscope.hpp"
 
-using namespace qretina;
+using namespace steganoscope;
 
 static int failures = 0;
 #define CHECK(cond, what) do { if (!(cond)) { failures++; std::fprintf(stderr, "FAIL %s\n", std::string(what).c_str()); } } while (0)

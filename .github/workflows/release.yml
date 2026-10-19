@@ -9,7 +9,7 @@ name: Release
 # It is signed with the development key, unless the `signing` environment holds a keystore:
 #   ANDROID_KEYSTORE (base64 of the .jks file), ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS
 # With -f publish=true it is published as the latest GitHub release, which the download page on
-# qretina.app links to; that needs the keystore. The log prints the certificate's SHA-256, to set
+# steganoscope.app links to; that needs the keystore. The log prints the certificate's SHA-256, to set
 # as the ANDROID_CERT_SHA256 variable so that the countdown link opens the app.
 # `stores` starts EAS builds for Google Play and the App Store; EAS holds the store signing keys.
 # It needs EXPO_TOKEN (a secret of the `signing` environment), and TRUSTED_KEYS and APP_KEYS set
@@ -56,13 +56,13 @@ jobs:
       - run: npx expo prebuild --platform android --no-install
         working-directory: app
         env:
-          QRETINA_RELEASE: '1'
+          STEGANOSCOPE_RELEASE: '1'
           TRUSTED_KEYS: ${{ vars.TRUSTED_KEYS }}
           APP_KEYS: ${{ secrets.APP_KEYS }}
       - run: ./gradlew assembleRelease --no-daemon
         working-directory: app/android
         env:
-          QRETINA_RELEASE: '1'
+          STEGANOSCOPE_RELEASE: '1'
           TRUSTED_KEYS: ${{ vars.TRUSTED_KEYS }}
           APP_KEYS: ${{ secrets.APP_KEYS }}
       - name: Sign with the release key
@@ -85,15 +85,15 @@ jobs:
         run: |
           [ "$HAS_KEYSTORE" = true ] || { echo "publishing needs the release keystore (ANDROID_KEYSTORE)" >&2; exit 1; }
           version=$(cd app && npx expo config --json | node -pe "JSON.parse(require('fs').readFileSync(0)).version")
-          cp app/android/app/build/outputs/apk/release/app-release.apk "$RUNNER_TEMP/QRetina-$version.apk"
-          gh release create "android-$version-$GITHUB_RUN_NUMBER" "$RUNNER_TEMP/QRetina-$version.apk" \
-            --title "QRetina $version for Android" --latest \
-            --notes "Install on Android by opening the APK. QRetina works offline once installed."
+          cp app/android/app/build/outputs/apk/release/app-release.apk "$RUNNER_TEMP/Steganoscope-$version.apk"
+          gh release create "android-$version-$GITHUB_RUN_NUMBER" "$RUNNER_TEMP/Steganoscope-$version.apk" \
+            --title "Steganoscope $version for Android" --latest \
+            --notes "Install on Android by opening the APK. Steganoscope works offline once installed."
         env:
           GH_TOKEN: ${{ github.token }}
       - uses: actions/upload-artifact@v4
         with:
-          name: qretina-apk
+          name: steganoscope-apk
           path: app/android/app/build/outputs/apk/release/*.apk
           retention-days: 30
 
@@ -114,6 +114,6 @@ jobs:
         working-directory: app
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-          QRETINA_RELEASE: '1'
+          STEGANOSCOPE_RELEASE: '1'
           TRUSTED_KEYS: ${{ vars.TRUSTED_KEYS }}
           APP_KEYS: ${{ secrets.APP_KEYS }}

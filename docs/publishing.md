@@ -15,7 +15,7 @@ Root public keys and app keys are built into the app. Changing them needs a new 
 
 ```
 gh api -X PUT repos/OWNER/REPO/environments/signing
-node tools/qretina.mjs keygen - | gh secret set SIGNING_KEY --env signing
+node tools/steganoscope.mjs keygen - | gh secret set SIGNING_KEY --env signing
 gh variable set TRUSTED_KEYS --body "<the printed public key>"
 node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))" | gh secret set APP_KEYS --env signing
 ```
@@ -38,7 +38,7 @@ signature supersedes an earlier one.
 A publisher, such as a relief organisation, makes its own key pair and sends only the public key:
 
 ```
-node tools/qretina.mjs keygen publisher.json
+node tools/steganoscope.mjs keygen publisher.json
 ```
 
 The root certifies it for ids that begin with a namespace, for a period:
@@ -50,7 +50,7 @@ gh workflow run certify.yml -f action=cert -f pub=<public key> -f name="Relief O
 The publisher then signs its own programs, which carry the certificate with them:
 
 ```
-node tools/qretina.mjs sign app.html --id org.relief.maps --cert publisher.cert --key publisher.json --gif maps.gif
+node tools/steganoscope.mjs sign app.html --id org.relief.maps --cert publisher.cert --key publisher.json --gif maps.gif
 ```
 
 A phone accepts such a program when the certificate was issued by a root key it holds, is valid at
@@ -87,13 +87,18 @@ A published APK must be signed with your own key. Create a keystore once and kee
 app signed with another key cannot update the installed one.
 
 ```
-keytool -genkeypair -v -keystore qretina.jks -alias qretina -keyalg RSA -keysize 4096 -validity 36500
-base64 -w0 qretina.jks | gh secret set ANDROID_KEYSTORE --env signing
+keytool -genkeypair -v -keystore steganoscope.jks -alias steganoscope -keyalg RSA -keysize 4096 -validity 36500
+base64 -w0 steganoscope.jks | gh secret set ANDROID_KEYSTORE --env signing
 gh secret set ANDROID_KEYSTORE_PASSWORD --env signing
-gh secret set ANDROID_KEY_ALIAS --env signing --body qretina
+gh secret set ANDROID_KEY_ALIAS --env signing --body steganoscope
 ```
 
 The workflow log prints the certificate's SHA-256 fingerprint. Set it as the `ANDROID_CERT_SHA256`
 variable (and your Apple team id as `APPLE_TEAM_ID`), then run `site.yml`, so that the countdown link
 opens the app directly. Store builds through EAS use keys that EAS holds; add their fingerprint too,
 separated by a comma.
+
+The countdown link lives on steganoscope.app, separately from the project's page on steganoscope.org.
+`site.yml` publishes steganoscope.org on this repository's GitHub Pages, and pushes the
+steganoscope.app files to the repository named in the `LINKS_REPO` variable, using the deploy key
+in the `LINKS_DEPLOY_KEY` secret. That repository's Pages serve its main branch on steganoscope.app.

@@ -33,11 +33,11 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm run typecheck -w @qretina/app
-      - run: npm test -w @qretina/app
+      - run: npm run typecheck -w @steganoscope/app
+      - run: npm test -w @steganoscope/app
       - name: Native bindings match their spec
-        run: npm run codegen -w @qretina/native && git diff --exit-code -- native/nitrogen
+        run: npm run codegen -w @steganoscope/native && git diff --exit-code -- native/nitrogen
       - run: npx expo-doctor
         working-directory: app
       - name: Bundle for Android and iOS
-        run: npm run bundle -w @qretina/app
+        run: npm run bundle -w @steganoscope/app

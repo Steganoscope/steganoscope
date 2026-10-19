@@ -29,12 +29,12 @@
 #endif
 
 // Forward declaration of `PushStatus` to properly resolve imports.
-namespace margelo::nitro::qretinanative { enum class PushStatus; }
+namespace margelo::nitro::steganoscopenative { enum class PushStatus; }
 
 #include "PushStatus.hpp"
 #include <string>
 
-namespace margelo::nitro::qretinanative {
+namespace margelo::nitro::steganoscopenative {
 
   /**
    * A struct which can be represented as a JavaScript object (Pushed).
@@ -55,26 +55,26 @@ namespace margelo::nitro::qretinanative {
     friend bool operator==(const Pushed& lhs, const Pushed& rhs) = default;
   };
 
-} // namespace margelo::nitro::qretinanative
+} // namespace margelo::nitro::steganoscopenative
 
 namespace margelo::nitro {
 
   // C++ Pushed <> JS Pushed (object)
   template <>
-  struct JSIConverter<margelo::nitro::qretinanative::Pushed> final {
-    static inline margelo::nitro::qretinanative::Pushed fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
+  struct JSIConverter<margelo::nitro::steganoscopenative::Pushed> final {
+    static inline margelo::nitro::steganoscopenative::Pushed fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
       jsi::Object obj = arg.asObject(runtime);
-      return margelo::nitro::qretinanative::Pushed(
-        JSIConverter<margelo::nitro::qretinanative::PushStatus>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "status"))),
+      return margelo::nitro::steganoscopenative::Pushed(
+        JSIConverter<margelo::nitro::steganoscopenative::PushStatus>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "status"))),
         JSIConverter<std::string>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "id"))),
         JSIConverter<double>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "n"))),
         JSIConverter<double>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "len"))),
         JSIConverter<double>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "rank")))
       );
     }
-    static inline jsi::Value toJSI(jsi::Runtime& runtime, const margelo::nitro::qretinanative::Pushed& arg) {
+    static inline jsi::Value toJSI(jsi::Runtime& runtime, const margelo::nitro::steganoscopenative::Pushed& arg) {
       jsi::Object obj(runtime);
-      obj.setProperty(runtime, PropNameIDCache::get(runtime, "status"), JSIConverter<margelo::nitro::qretinanative::PushStatus>::toJSI(runtime, arg.status));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "status"), JSIConverter<margelo::nitro::steganoscopenative::PushStatus>::toJSI(runtime, arg.status));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "id"), JSIConverter<std::string>::toJSI(runtime, arg.id));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "n"), JSIConverter<double>::toJSI(runtime, arg.n));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "len"), JSIConverter<double>::toJSI(runtime, arg.len));
@@ -89,7 +89,7 @@ namespace margelo::nitro {
       if (!nitro::isPlainObject(runtime, obj)) {
         return false;
       }
-      if (!JSIConverter<margelo::nitro::qretinanative::PushStatus>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "status")))) return false;
+      if (!JSIConverter<margelo::nitro::steganoscopenative::PushStatus>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "status")))) return false;
       if (!JSIConverter<std::string>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "id")))) return false;
       if (!JSIConverter<double>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "n")))) return false;
       if (!JSIConverter<double>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "len")))) return false;

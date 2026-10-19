@@ -1,7 +1,7 @@
 // App state shared by the screens, persisted through store.ts.
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { MAX_LEN, streamId } from '@qretina/protocol/fountain.js';
-import { packFile } from '@qretina/protocol/containers.js';
+import { MAX_LEN, streamId } from '@steganoscope/protocol/fountain.js';
+import { packFile } from '@steganoscope/protocol/containers.js';
 import { appKeys, bundledCrl, rootKeys } from './config.ts';
 import { Inbox, describe, type Keys, type Meta } from './inbox.ts';
 import { outgoing } from './outgoing.ts';

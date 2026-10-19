@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Writes the test vectors other implementations check themselves against, deterministically, so
 // test/native.test.mjs can check the files are current:
-//   app/src/lib/vectors.json  the vectors of spec/qretina.yaml, for the app's self-test on devices
+//   app/src/lib/vectors.json  the vectors of spec/steganoscope.yaml, for the app's self-test on devices
 //   test/vectors/streams.txt  streams from the reference implementation, for native/core, one record per line:
 //   case <name> <block>        a new stream
 //   container <hex>            its container
@@ -18,7 +18,7 @@ import { PROTOCOL, encoder, hex, mask, mulberry32 } from '../protocol/fountain.j
 export function vectors() {
   const out = [], rng = mulberry32(2024);
   const bytes = n => Uint8Array.from({ length: n }, () => rng() & 255);
-  const text = n => new TextEncoder().encode('QRetina carries files across the gap. '.repeat(Math.ceil(n / 36)).slice(0, n));
+  const text = n => new TextEncoder().encode('Steganoscope carries files across the gap. '.repeat(Math.ceil(n / 36)).slice(0, n));
 
   for (const [seed, n] of [[12345, 64], [1, 1], [7, 33], [4294967295, 100]]) out.push(`mask ${seed} ${n} ${mask(seed, n).join('')}`);
   for (const n of [0, 3, 55, 64, 1000]) { const b = bytes(n); out.push(`sha256 ${hex(b) || '-'} ${hex(sha256(b))}`); }
@@ -39,13 +39,13 @@ export function vectors() {
 
   const ok = `${PROTOCOL}/0123456789ABCDEF`;
   for (const r of [`${ok}/0/100/1/AA`, `${ok}/4097/100000/1/AA`, `${ok}/4/100/1/AA`, `${ok}/4/99999999/1/AA`, `${ok}/4/100/4294967296/AA`,
-    `${ok}/10/9/1/AA`, `${ok}/1/100000/1/AA`, `${PROTOCOL}/short/4/100/1/AA`, 'garbage', 'HTTPS://QRETINA.APP/SCAN', `QRT000000/0123456789ABCDEF/1/4/1/000000`,
+    `${ok}/10/9/1/AA`, `${ok}/1/100000/1/AA`, `${PROTOCOL}/short/4/100/1/AA`, 'garbage', 'HTTPS://STEGANOSCOPE.APP/SCAN', `STG000000/0123456789ABCDEF/1/4/1/000000`,
     `${ok}/1/2/1/:::`, `${ok}/1/2/1/GGW`]) out.push(`reject ${r}`);
   return out.join('\n') + '\n';
 }
 
 export const appVectors = () =>
-  JSON.stringify({ protocol: PROTOCOL, ...parse(readFileSync(new URL('../spec/qretina.yaml', import.meta.url), 'utf8')).vectors }, null, 2) + '\n';
+  JSON.stringify({ protocol: PROTOCOL, ...parse(readFileSync(new URL('../spec/steganoscope.yaml', import.meta.url), 'utf8')).vectors }, null, 2) + '\n';
 
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
   writeFileSync(new URL('../test/vectors/streams.txt', import.meta.url), vectors());

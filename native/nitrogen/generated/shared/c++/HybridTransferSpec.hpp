@@ -14,9 +14,9 @@
 #endif
 
 // Forward declaration of `HybridTransferReceiverSpec` to properly resolve imports.
-namespace margelo::nitro::qretinanative { class HybridTransferReceiverSpec; }
+namespace margelo::nitro::steganoscopenative { class HybridTransferReceiverSpec; }
 // Forward declaration of `HybridTransferEncoderSpec` to properly resolve imports.
-namespace margelo::nitro::qretinanative { class HybridTransferEncoderSpec; }
+namespace margelo::nitro::steganoscopenative { class HybridTransferEncoderSpec; }
 
 #include <string>
 #include <memory>
@@ -24,7 +24,7 @@ namespace margelo::nitro::qretinanative { class HybridTransferEncoderSpec; }
 #include "HybridTransferEncoderSpec.hpp"
 #include <NitroModules/ArrayBuffer.hpp>
 
-namespace margelo::nitro::qretinanative {
+namespace margelo::nitro::steganoscopenative {
 
   using namespace margelo::nitro;
 
@@ -67,4 +67,4 @@ namespace margelo::nitro::qretinanative {
       static constexpr auto TAG = "Transfer";
   };
 
-} // namespace margelo::nitro::qretinanative
+} // namespace margelo::nitro::steganoscopenative

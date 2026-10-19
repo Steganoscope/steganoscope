@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<title>QRetina</title>
+<title>Steganoscope</title>
 <meta name="description" content="Send files between phones through QR codes, with no network.">
 <style>
   :root { color-scheme: light dark; --fg: #14212B; --bg: #F4F7F9; --dim: #55616B; --accent: #24557A; }
@@ -20,16 +20,17 @@
 <body>
 <main>
   <picture><source srcset="mark-dark.svg" media="(prefers-color-scheme: dark)"><img src="mark.svg" alt="" width="216" height="84"></picture>
-  <h1>QRetina</h1>
-  <p>QRetina sends files between phones as a stream of QR codes: one phone shows them, the other films
+  <h1>Steganoscope</h1>
+  <p>Steganoscope sends files between phones as a stream of QR codes: one phone shows them, the other films
   them. It needs no network, pairing or radio, and works when frames are missed.</p>
-  <p>You scanned a QRetina broadcast, but the app is not installed on this phone.</p>
   <ul>
-    <li><a href="https://github.com/lucas-ebi/qretina/releases/latest">Android (APK)</a></li>
+    <li><a href="https://github.com/Steganoscope/steganoscope/releases/latest">Android (APK)</a></li>
     <li class="dim">App Store and Google Play: not yet published.</li>
   </ul>
-  <p class="dim">Once installed, scan the broadcast again: the countdown at its start opens QRetina.</p>
-  <p class="dim"><a href="https://docs.qretina.app">Documentation</a> · <a href="privacy.html">Privacy</a> · <a href="https://github.com/lucas-ebi/qretina">Source</a> · MIT licence</p>
+  <p>Broadcasts are unreadable to other QR readers, and can be made private to holders of a group key.
+  Signed programs run in a sandbox with no network access. The protocol is open and documented, with
+  a command line for computers.</p>
+  <p class="dim"><a href="https://docs.steganoscope.org">Documentation</a> · <a href="privacy.html">Privacy</a> · <a href="https://github.com/Steganoscope/steganoscope">Source</a> · MIT licence</p>
 </main>
 </body>
 </html>

@@ -4,7 +4,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import { router, useIsFocused } from 'expo-router';
 import { useCallback, useRef, useState } from 'react';
 import { Alert, View } from 'react-native';
-import type { Progress } from '@qretina/protocol/fountain.js';
+import type { Progress } from '@steganoscope/protocol/fountain.js';
 import { Button, Card, Label, Screen, kb, useColors } from '../components/ui.tsx';
 import { useBusy } from '../lib/busy.tsx';
 import type { Event } from '../lib/inbox.ts';
@@ -31,7 +31,7 @@ export default function Receive() {
     if (code?.type === 'html' && app.trust.runPrograms) {
       const run = () => { app.setTrust(approve(app.trust, code)); router.push(`/run/${e.meta.id}`); };
       if (isApproved(app.trust, code)) run();
-      else Alert.alert(`Run ${code.id}?`, `Version ${code.version}, signed by ${code.publisher?.name ?? 'QRetina'} (key ${code.signer}). It runs offline, isolated from your data.`,
+      else Alert.alert(`Run ${code.id}?`, `Version ${code.version}, signed by ${code.publisher?.name ?? 'Steganoscope'} (key ${code.signer}). It runs offline, isolated from your data.`,
         [{ text: 'Not now', style: 'cancel' }, { text: 'Run', onPress: run }]);
     }
   }, [app]);
@@ -59,7 +59,7 @@ export default function Receive() {
   if (!permission.granted) {
     return (
       <Screen style={{ justifyContent: 'center' }}>
-        <Label>QRetina receives by filming QR codes on another screen. It needs the camera for that, and nothing else.</Label>
+        <Label>Steganoscope receives by filming QR codes on another screen. It needs the camera for that, and nothing else.</Label>
         <Button kind="primary" title="Allow camera" onPress={requestPermission} />
       </Screen>
     );
@@ -75,7 +75,7 @@ export default function Receive() {
         )}
       </View>
       <View style={{ padding: 16, gap: 8, backgroundColor: c.bg }}>
-        {active.length === 0 && <Label dim>Point the camera at a QRetina broadcast. Frames can be missed; any enough of them will do.</Label>}
+        {active.length === 0 && <Label dim>Point the camera at a Steganoscope broadcast. Frames can be missed; any enough of them will do.</Label>}
         {active.map(s => {
           const secs = Math.max(0.5, (s.updated - s.started) / 1000);
           return (

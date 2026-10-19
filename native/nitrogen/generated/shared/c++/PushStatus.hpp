@@ -23,7 +23,7 @@
 #error NitroModules cannot be found! Are you sure you installed NitroModules properly?
 #endif
 
-namespace margelo::nitro::qretinanative {
+namespace margelo::nitro::steganoscopenative {
 
   /**
    * An enum which can be represented as a JavaScript union (PushStatus).
@@ -35,30 +35,30 @@ namespace margelo::nitro::qretinanative {
     CORRUPT      SWIFT_NAME(corrupt) = 3,
   } CLOSED_ENUM;
 
-} // namespace margelo::nitro::qretinanative
+} // namespace margelo::nitro::steganoscopenative
 
 namespace margelo::nitro {
 
   // C++ PushStatus <> JS PushStatus (union)
   template <>
-  struct JSIConverter<margelo::nitro::qretinanative::PushStatus> final {
-    static inline margelo::nitro::qretinanative::PushStatus fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
+  struct JSIConverter<margelo::nitro::steganoscopenative::PushStatus> final {
+    static inline margelo::nitro::steganoscopenative::PushStatus fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
       std::string unionValue = JSIConverter<std::string>::fromJSI(runtime, arg);
       switch (hashString(unionValue.c_str(), unionValue.size())) {
-        case hashString("ignored"): return margelo::nitro::qretinanative::PushStatus::IGNORED;
-        case hashString("progress"): return margelo::nitro::qretinanative::PushStatus::PROGRESS;
-        case hashString("ready"): return margelo::nitro::qretinanative::PushStatus::READY;
-        case hashString("corrupt"): return margelo::nitro::qretinanative::PushStatus::CORRUPT;
+        case hashString("ignored"): return margelo::nitro::steganoscopenative::PushStatus::IGNORED;
+        case hashString("progress"): return margelo::nitro::steganoscopenative::PushStatus::PROGRESS;
+        case hashString("ready"): return margelo::nitro::steganoscopenative::PushStatus::READY;
+        case hashString("corrupt"): return margelo::nitro::steganoscopenative::PushStatus::CORRUPT;
         default: [[unlikely]]
           throw std::invalid_argument("Cannot convert \"" + unionValue + "\" to enum PushStatus - invalid value!");
       }
     }
-    static inline jsi::Value toJSI(jsi::Runtime& runtime, margelo::nitro::qretinanative::PushStatus arg) {
+    static inline jsi::Value toJSI(jsi::Runtime& runtime, margelo::nitro::steganoscopenative::PushStatus arg) {
       switch (arg) {
-        case margelo::nitro::qretinanative::PushStatus::IGNORED: return JSIConverter<std::string>::toJSI(runtime, "ignored");
-        case margelo::nitro::qretinanative::PushStatus::PROGRESS: return JSIConverter<std::string>::toJSI(runtime, "progress");
-        case margelo::nitro::qretinanative::PushStatus::READY: return JSIConverter<std::string>::toJSI(runtime, "ready");
-        case margelo::nitro::qretinanative::PushStatus::CORRUPT: return JSIConverter<std::string>::toJSI(runtime, "corrupt");
+        case margelo::nitro::steganoscopenative::PushStatus::IGNORED: return JSIConverter<std::string>::toJSI(runtime, "ignored");
+        case margelo::nitro::steganoscopenative::PushStatus::PROGRESS: return JSIConverter<std::string>::toJSI(runtime, "progress");
+        case margelo::nitro::steganoscopenative::PushStatus::READY: return JSIConverter<std::string>::toJSI(runtime, "ready");
+        case margelo::nitro::steganoscopenative::PushStatus::CORRUPT: return JSIConverter<std::string>::toJSI(runtime, "corrupt");
         default: [[unlikely]]
           throw std::invalid_argument("Cannot convert PushStatus to JS - invalid value: "
                                     + std::to_string(static_cast<int>(arg)) + "!");

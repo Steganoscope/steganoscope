@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { Receiver, encoder } from '@qretina/protocol/fountain.js';
-import { b64url, issueCert, keyId, loadKey, packFile, seal, signCode, toB64url } from '@qretina/protocol/containers.js';
+import { Receiver, encoder } from '@steganoscope/protocol/fountain.js';
+import { b64url, issueCert, keyId, loadKey, packFile, seal, signCode, toB64url } from '@steganoscope/protocol/containers.js';
 import { ed25519 } from '@noble/curves/ed25519.js';
 import type { Engine } from '../src/lib/engine.ts';
 import { Inbox, type Event } from '../src/lib/inbox.ts';
@@ -41,7 +41,7 @@ function world() {
 
 test('a file sealed with the app key arrives as a file; the countdown link is ignored', async () => {
   const w = world();
-  assert.equal(w.inbox.push('HTTPS://QRETINA.APP/SCAN'), null);
+  assert.equal(w.inbox.push('HTTPS://STEGANOSCOPE.APP/SCAN'), null);
   const r = await scan(w.inbox, outgoing(packFile('map.png', 'image/png', rand()), [w.app]));
   assert.equal(r.kind, 'item');
   if (r.kind !== 'item') return;

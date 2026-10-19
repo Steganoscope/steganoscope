@@ -1,20 +1,20 @@
-package com.qretinanative
+package com.steganoscopenative
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.module.model.ReactModuleInfoProvider;
 import com.facebook.react.BaseReactPackage;
-import com.margelo.nitro.qretinanative.QRetinaNativeOnLoad
+import com.margelo.nitro.steganoscopenative.SteganoscopeNativeOnLoad
 
 
-public class QRetinaNativePackage : BaseReactPackage() {
+public class SteganoscopeNativePackage : BaseReactPackage() {
   override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? = null
 
   override fun getReactModuleInfoProvider(): ReactModuleInfoProvider = ReactModuleInfoProvider { emptyMap() }
 
   companion object {
     init {
-      QRetinaNativeOnLoad.initializeNative()
+      SteganoscopeNativeOnLoad.initializeNative()
     }
   }
 }

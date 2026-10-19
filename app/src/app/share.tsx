@@ -1,11 +1,11 @@
-// A file shared to QRetina from another app. A group key file is offered for the keyring; any other
+// A file shared to Steganoscope from another app. A group key file is offered for the keyring; any other
 // file is added to the library, ready to broadcast.
 import { File } from 'expo-file-system';
 import { router } from 'expo-router';
 import { useIncomingShare } from 'expo-sharing';
 import { useEffect, useState } from 'react';
 import { Alert, ScrollView } from 'react-native';
-import { b64url, keyId } from '@qretina/protocol/containers.js';
+import { b64url, keyId } from '@steganoscope/protocol/containers.js';
 import { Button, Card, Label, kb, useColors } from '../components/ui.tsx';
 import { useBusy } from '../lib/busy.tsx';
 import { useApp } from '../lib/state.tsx';
@@ -14,7 +14,7 @@ type Incoming = { uri: string; name: string; mime: string; size: number | null }
 
 // A key file is small JSON holding a 32-byte key: { "label": "...", "key": "<base64url>" }.
 async function asKeyFile(f: Incoming) {
-  if (!/\.qretinakey$/i.test(f.name) && !(f.mime === 'application/json' && (f.size ?? 0) < 1000)) return null;
+  if (!/\.steganoscopekey$/i.test(f.name) && !(f.mime === 'application/json' && (f.size ?? 0) < 1000)) return null;
   try {
     const k = JSON.parse(await new File(f.uri).text()) as { label?: string; key?: string }, key = b64url(k.key ?? '');
     return key.length === 32 ? { label: k.label ?? '', key } : null;
