@@ -34,7 +34,12 @@ The app uses native modules, so it runs in a development build, not in Expo Go:
 cd app
 npx expo run:android    # Android SDK and a device or emulator
 npx expo run:ios        # macOS with Xcode
+npx expo run:ios --device   # a plugged-in iPhone
 ```
+
+With a free Apple ID (a personal team), set `STEGANOSCOPE_IOS_PERSONAL_TEAM=1` first. A personal team
+cannot sign Associated Domains or App Groups, so this leaves out the countdown link and the iOS
+share extension. Without it, both are on, which a paid account needs.
 
 Without `TRUSTED_KEYS` and `APP_KEYS`, a development build trusts no program and sends unsealed
 items. Set them in the environment to test signing and sealing.

@@ -3,6 +3,8 @@
 //                 or by publishers they certify, may run.
 //   APP_KEYS      sealing keys (base64url, 32 bytes), comma-separated, current first; everything
 //                 sent is sealed with the first, and any of them opens what is received.
+//   STEGANOSCOPE_IOS_PERSONAL_TEAM set to 1 to build for an iPhone with a free Apple ID: a personal team cannot
+//                 sign Associated Domains or App Groups, so the countdown link and sharing into the app are left out.
 //   STEGANOSCOPE_RELEASE set to 1 for store builds: the keys become mandatory and Android loses the
 //                 INTERNET permission, which only the development server needs.
 // The newest revocation list, when release/crl.bin exists (from certify.yml), ships with the app,
@@ -11,6 +13,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import type { ConfigContext, ExpoConfig } from 'expo/config';
 
 const list = (v?: string) => (v ?? '').split(/[\s,]+/).filter(Boolean);
+const personalTeam = process.env.STEGANOSCOPE_IOS_PERSONAL_TEAM === '1';
 const release = process.env.STEGANOSCOPE_RELEASE === '1' || process.env.EAS_BUILD_PROFILE === 'production';
 const rootKeys = list(process.env.TRUSTED_KEYS), appKeys = list(process.env.APP_KEYS);
 const crlFile = new URL('./release/crl.bin', import.meta.url);
@@ -32,7 +35,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     bundleIdentifier: 'app.steganoscope',
     supportsTablet: true,
-    associatedDomains: ['applinks:steganoscope.app'],
+    ...(personalTeam ? {} : { associatedDomains: ['applinks:steganoscope.app'] }),
   },
   android: {
     package: 'app.steganoscope',
@@ -65,7 +68,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     'expo-secure-store',
     // Other apps can share a file to Steganoscope, to broadcast it, or a key file, to add it.
     ['expo-sharing', {
-      ios: { enabled: true, activationRule: { supportsFileWithMaxCount: 1, supportsImageWithMaxCount: 1, supportsMovieWithMaxCount: 1 } },
+      ios: { enabled: !personalTeam, activationRule: { supportsFileWithMaxCount: 1, supportsImageWithMaxCount: 1, supportsMovieWithMaxCount: 1 } },
       android: { enabled: true, singleShareMimeTypes: ['*/*'] },
     }],
   ],
