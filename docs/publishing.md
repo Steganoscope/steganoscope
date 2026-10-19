@@ -97,3 +97,8 @@ The workflow log prints the certificate's SHA-256 fingerprint. Set it as the `AN
 variable (and your Apple team id as `APPLE_TEAM_ID`), then run `site.yml`, so that the countdown link
 opens the app directly. Store builds through EAS use keys that EAS holds; add their fingerprint too,
 separated by a comma.
+
+The countdown link lives on steganoscope.app, separately from the project's page on steganoscope.org.
+`site.yml` publishes steganoscope.org on this repository's GitHub Pages, and pushes the
+steganoscope.app files to the repository named in the `LINKS_REPO` variable, using the deploy key
+in the `LINKS_DEPLOY_KEY` secret. That repository's Pages serve its main branch on steganoscope.app.

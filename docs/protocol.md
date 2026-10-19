@@ -1,6 +1,6 @@
 # Protocol
 
-The normative parameters are in [`spec/steganoscope.yaml`](https://github.com/lucas-ebi/steganoscope/blob/main/spec/steganoscope.yaml).
+The normative parameters are in [`spec/steganoscope.yaml`](https://github.com/Steganoscope/steganoscope/blob/main/spec/steganoscope.yaml).
 This page explains them. The key words MUST, MUST NOT, SHOULD and MAY are used as in RFC 2119.
 
 ## Identifier

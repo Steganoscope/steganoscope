@@ -10,7 +10,7 @@
 | `native/` | `@steganoscope/native`: the C++ layer bound to the app with Nitro modules |
 | `app/` | The Expo app (Android and iOS) |
 | `tools/` | Command line, vector generator |
-| `site/` | steganoscope.app: download page and link association files |
+| `site/` | The steganoscope.org page, and the steganoscope.app countdown link with its association files |
 | `docs/` | This documentation |
 | `test/` | Tests of the protocol, CLI and native core |
 

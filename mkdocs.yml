@@ -1,7 +1,7 @@
 site_name: Steganoscope
-site_url: https://docs.steganoscope.app/
+site_url: https://docs.steganoscope.org/
 site_description: Files and signed programs through QR codes, with no network.
-repo_url: https://github.com/lucas-ebi/steganoscope
+repo_url: https://github.com/Steganoscope/steganoscope
 edit_uri: edit/main/docs/
 theme:
   name: material

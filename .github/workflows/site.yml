@@ -1,9 +1,13 @@
 name: Site
 
-# Publishes steganoscope.app (site/) on GitHub Pages: the page a phone without Steganoscope opens from a
-# countdown, and the files that let the link open the app when it is installed. Set the
-# repository variables APPLE_TEAM_ID and ANDROID_CERT_SHA256 once the apps are signed, and point
-# the steganoscope.app domain at GitHub Pages.
+# Publishes the two sites built from site/:
+# - steganoscope.org, the project's page, on this repository's GitHub Pages.
+# - steganoscope.app, the countdown link only: the page a phone without Steganoscope opens, and the
+#   files that let the link open the app when it is installed. It is pushed to the repository named
+#   in the LINKS_REPO variable (e.g. Steganoscope/steganoscope.github.io), whose Pages serve the
+#   steganoscope.app domain from its main branch, with a deploy key that can write to it as the
+#   LINKS_DEPLOY_KEY secret. Without them that step is skipped.
+# Set the repository variables APPLE_TEAM_ID and ANDROID_CERT_SHA256 once the apps are signed.
 
 on:
   push:
@@ -33,12 +37,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node site/build.mjs "$RUNNER_TEMP/site"
+      - run: node site/build.mjs "$RUNNER_TEMP/website" "$RUNNER_TEMP/links"
         env:
           APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
           ANDROID_CERT_SHA256: ${{ vars.ANDROID_CERT_SHA256 }}
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ runner.temp }}/site
+          path: ${{ runner.temp }}/website
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Push steganoscope.app
+        env:
+          LINKS_REPO: ${{ vars.LINKS_REPO }}
+          LINKS_DEPLOY_KEY: ${{ secrets.LINKS_DEPLOY_KEY }}
+        run: |
+          if [ -z "$LINKS_REPO" ] || [ -z "$LINKS_DEPLOY_KEY" ]; then echo "LINKS_REPO or LINKS_DEPLOY_KEY not set: steganoscope.app not published"; exit 0; fi
+          key="$RUNNER_TEMP/links_key"; (umask 077; printf '%s\n' "$LINKS_DEPLOY_KEY" > "$key")
+          cd "$RUNNER_TEMP/links"
+          git init -q -b main && git add -A
+          git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com commit -q -m "Publish steganoscope.app from $GITHUB_REPOSITORY@$GITHUB_SHA"
+          GIT_SSH_COMMAND="ssh -i $key -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new" git push -f "git@github.com:$LINKS_REPO.git" main
+          rm -f "$key"

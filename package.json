@@ -1,7 +1,7 @@
 {
   "name": "steganoscope",
   "license": "MIT",
-  "repository": "github:lucas-ebi/steganoscope",
+  "repository": "github:Steganoscope/steganoscope",
   "private": true,
   "type": "module",
   "workspaces": [
