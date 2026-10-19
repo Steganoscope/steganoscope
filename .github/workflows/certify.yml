@@ -7,7 +7,7 @@ name: Certify publisher
 #   gh workflow run certify.yml -f action=crl -f number=2 -f revoke=5,9
 # then fetch the result with:  gh run download <run-id>
 #
-# A publisher creates its own key pair with `node tools/qretina.mjs keygen` and sends only the public
+# A publisher creates its own key pair with `node tools/steganoscope.mjs keygen` and sends only the public
 # key. It signs its programs with `sign --cert <the certificate> --key <its private key>`.
 
 on:
@@ -58,12 +58,12 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/out"
           if [ "$ACTION" = cert ]; then
-            node tools/qretina.mjs cert --pub "$PUB" --name "$NAME" --ns "$NS" --days "$DAYS" \
+            node tools/steganoscope.mjs cert --pub "$PUB" --name "$NAME" --ns "$NS" --days "$DAYS" \
               --out "$RUNNER_TEMP/out/publisher.cert"
           else
-            node tools/qretina.mjs crl --number "$NUMBER" ${REVOKE:+--revoke "$REVOKE"} \
+            node tools/steganoscope.mjs crl --number "$NUMBER" ${REVOKE:+--revoke "$REVOKE"} \
               --gif "$RUNNER_TEMP/out/crl-$NUMBER.gif"
-            node tools/qretina.mjs crl --number "$NUMBER" ${REVOKE:+--revoke "$REVOKE"} \
+            node tools/steganoscope.mjs crl --number "$NUMBER" ${REVOKE:+--revoke "$REVOKE"} \
               --out "$RUNNER_TEMP/out/crl.bin"
           fi
         env:
@@ -78,6 +78,6 @@ jobs:
           REVOKE: ${{ inputs.revoke }}
       - uses: actions/upload-artifact@v4
         with:
-          name: qretina-${{ inputs.action }}
+          name: steganoscope-${{ inputs.action }}
           path: ${{ runner.temp }}/out/
           retention-days: 14

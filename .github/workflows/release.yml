@@ -85,15 +85,15 @@ jobs:
         run: |
           [ "$HAS_KEYSTORE" = true ] || { echo "publishing needs the release keystore (ANDROID_KEYSTORE)" >&2; exit 1; }
           version=$(cd app && npx expo config --json | node -pe "JSON.parse(require('fs').readFileSync(0)).version")
-          cp app/android/app/build/outputs/apk/release/app-release.apk "$RUNNER_TEMP/QRetina-$version.apk"
-          gh release create "android-$version-$GITHUB_RUN_NUMBER" "$RUNNER_TEMP/QRetina-$version.apk" \
-            --title "QRetina $version for Android" --latest \
-            --notes "Install on Android by opening the APK. QRetina works offline once installed."
+          cp app/android/app/build/outputs/apk/release/app-release.apk "$RUNNER_TEMP/Steganoscope-$version.apk"
+          gh release create "android-$version-$GITHUB_RUN_NUMBER" "$RUNNER_TEMP/Steganoscope-$version.apk" \
+            --title "Steganoscope $version for Android" --latest \
+            --notes "Install on Android by opening the APK. Steganoscope works offline once installed."
         env:
           GH_TOKEN: ${{ github.token }}
       - uses: actions/upload-artifact@v4
         with:
-          name: qretina-apk
+          name: steganoscope-apk
           path: app/android/app/build/outputs/apk/release/*.apk
           retention-days: 30
 

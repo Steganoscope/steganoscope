@@ -16,8 +16,8 @@ export default function Settings() {
   const [label, setLabel] = useState('');
   const [passphrase, setPassphrase] = useState('');
   const [busy, setBusy] = useState(false);
-  // Who signed the programs in the library: certified publishers by name, others as QRetina.
-  const publishers = [...new Set(app.items.flatMap(m => (m.code ? [`${m.code.publisher ?? 'QRetina'} (key ${m.code.signer})`] : [])))];
+  // Who signed the programs in the library: certified publishers by name, others as Steganoscope.
+  const publishers = [...new Set(app.items.flatMap(m => (m.code ? [`${m.code.publisher ?? 'Steganoscope'} (key ${m.code.signer})`] : [])))];
   const input = { color: c.fg, backgroundColor: c.card, borderRadius: 8, padding: 10, fontSize: 16 };
 
   async function addKey(key: Uint8Array, name: string) {
@@ -38,7 +38,7 @@ export default function Settings() {
     if (r.canceled) return;
     try {
       const k = JSON.parse(await r.result.text()) as { label?: string; key: string }, key = b64url(k.key);
-      if (key.length !== 32) throw new Error('not a QRetina key file');
+      if (key.length !== 32) throw new Error('not a Steganoscope key file');
       await addKey(key, label || k.label || '');
     } catch (e) {
       Alert.alert('Could not read the key file', (e as Error).message);
@@ -52,7 +52,7 @@ export default function Settings() {
           <Label bold>Run signed programs</Label>
           <Switch value={app.trust.runPrograms} onValueChange={runPrograms => app.setTrust({ ...app.trust, runPrograms })} />
         </View>
-        <Label dim size={14}>Programs run only when signed by QRetina or a publisher it certified, in a sandbox without network or access to your data.</Label>
+        <Label dim size={14}>Programs run only when signed by Steganoscope or a publisher it certified, in a sandbox without network or access to your data.</Label>
       </Card>
 
       <Card>
@@ -82,14 +82,14 @@ export default function Settings() {
 
       <Card>
         <Label bold>Privacy</Label>
-        <Label dim size={14}>QRetina collects nothing and makes no network connections. The camera is used only to read QR codes; no images are kept. Received items stay on this phone until you delete them or share them yourself. Group keys are kept in the phone's secure storage.</Label>
+        <Label dim size={14}>Steganoscope collects nothing and makes no network connections. The camera is used only to read QR codes; no images are kept. Received items stay on this phone until you delete them or share them yourself. Group keys are kept in the phone's secure storage.</Label>
       </Card>
 
       <Button title="Diagnostics" onPress={() => router.push('/diagnostics')} />
 
       <View style={{ alignItems: 'center', gap: 6, paddingVertical: 16 }}>
         <Mark width={160} />
-        <Label bold>QRetina {Constants.expoConfig?.version}</Label>
+        <Label bold>Steganoscope {Constants.expoConfig?.version}</Label>
         <Label dim size={14}>Files through light, with no network.</Label>
       </View>
     </ScrollView>

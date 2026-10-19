@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "description": "The QRetina transfer layer in C++ (core/), bound to React Native with Nitro modules.",
+  "description": "The Steganoscope transfer layer in C++ (core/), bound to React Native with Nitro modules.",
   "main": "src/index.ts",
   "react-native": "src/index.ts",
   "types": "src/index.ts",

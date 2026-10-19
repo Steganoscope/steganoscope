@@ -1,15 +1,15 @@
 # Command line
 
-`tools/qretina.mjs` broadcasts from a computer and signs programs. It needs Node 20 or newer and
+`tools/steganoscope.mjs` broadcasts from a computer and signs programs. It needs Node 20 or newer and
 `npm install` in the repository.
 
 ```
-node tools/qretina.mjs file <file> [--name N] [--mime M] [output]
-node tools/qretina.mjs sign <file> --id <id> [--type html|json] [--version N] [--cert pub.cert] [--key k.json] [output]
-node tools/qretina.mjs keygen [file | -]
-node tools/qretina.mjs cert --pub <public key> --name <name> --ns <id prefix> [--days 365] [--serial N] [--key k.json] --out pub.cert
-node tools/qretina.mjs crl --number N [--revoke serial,serial...] [--key k.json] [output]
-node tools/qretina.mjs key [--passphrase P] [--label L] --out group.qretinakey
+node tools/steganoscope.mjs file <file> [--name N] [--mime M] [output]
+node tools/steganoscope.mjs sign <file> --id <id> [--type html|json] [--version N] [--cert pub.cert] [--key k.json] [output]
+node tools/steganoscope.mjs keygen [file | -]
+node tools/steganoscope.mjs cert --pub <public key> --name <name> --ns <id prefix> [--days 365] [--serial N] [--key k.json] --out pub.cert
+node tools/steganoscope.mjs crl --number N [--revoke serial,serial...] [--key k.json] [output]
+node tools/steganoscope.mjs key [--passphrase P] [--label L] --out group.qretinakey
 ```
 
 Output options:
@@ -35,6 +35,6 @@ the command warns, and only receivers built without app keys open the output.
 Examples:
 
 ```
-node tools/qretina.mjs file map.pdf --gif map.gif
-node tools/qretina.mjs sign examples/snake.html --id snake --gif snake.gif
+node tools/steganoscope.mjs file map.pdf --gif map.gif
+node tools/steganoscope.mjs sign examples/snake.html --id snake --gif snake.gif
 ```

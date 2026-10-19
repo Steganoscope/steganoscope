@@ -7,15 +7,15 @@ import { join } from 'node:path';
 import { promisify } from 'node:util';
 import { PROTOCOL } from '../protocol/fountain.js';
 import { b64url, keyFromPassphrase, keyId, loadKey, toB64url } from '../protocol/containers.js';
-import { LINK, makeFrames } from '../tools/qretina.mjs';
+import { LINK, makeFrames } from '../tools/steganoscope.mjs';
 import { parseGif, readQr } from './helpers/gif.mjs';
 import { receive } from './helpers/stream.mjs';
 
 const run = promisify(execFile);
-const cli = new URL('../tools/qretina.mjs', import.meta.url).pathname;
+const cli = new URL('../tools/steganoscope.mjs', import.meta.url).pathname;
 const snake = new URL('../examples/snake.html', import.meta.url).pathname;
 const node = (args, env = {}, cwd) => run(process.execPath, [cli, ...args], { env: { ...process.env, ...env }, cwd });
-const tmp = () => mkdtemp(join(tmpdir(), 'qretina-cli-'));
+const tmp = () => mkdtemp(join(tmpdir(), 'steganoscope-cli-'));
 const makeFramesOf = bytes => makeFrames(new Uint8Array(bytes)).frames;
 
 test('keygen - prints the private key to stdout, the public key to stderr, and writes no file', async () => {

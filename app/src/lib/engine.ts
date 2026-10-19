@@ -19,7 +19,7 @@ export type Engine = {
 const transfer = loadTransfer();
 
 // Why the app cannot run, or null.
-export const engineError = transfer ? null : 'This build of QRetina lacks its transfer engine. Install a release build.';
+export const engineError = transfer ? null : 'This build of Steganoscope lacks its transfer engine. Install a release build.';
 
 function need() {
   if (!transfer) throw new Error(engineError!);

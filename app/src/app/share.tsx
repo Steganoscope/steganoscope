@@ -1,4 +1,4 @@
-// A file shared to QRetina from another app. A group key file is offered for the keyring; any other
+// A file shared to Steganoscope from another app. A group key file is offered for the keyring; any other
 // file is added to the library, ready to broadcast.
 import { File } from 'expo-file-system';
 import { router } from 'expo-router';

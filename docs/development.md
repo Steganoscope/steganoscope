@@ -4,7 +4,7 @@
 
 | Path | Content |
 |---|---|
-| `spec/qretina.yaml` | Protocol parameters and test vectors; the protocol identifier is derived from them |
+| `spec/steganoscope.yaml` | Protocol parameters and test vectors; the protocol identifier is derived from them |
 | `protocol/` | Reference implementation in plain JavaScript: containers and keys for the app; everything for the CLI and the tests |
 | `native/core/` | The transfer layer in C++, checked against the reference |
 | `native/` | `@qretina/native`: the C++ layer bound to the app with Nitro modules |
@@ -53,5 +53,5 @@ changing the spec, run the code generator; CI fails if the generated files are o
 
 ## Protocol changes
 
-Change `parameters` in `spec/qretina.yaml`, set `PROTOCOL` in `protocol/fountain.js` and
+Change `parameters` in `spec/steganoscope.yaml`, set `PROTOCOL` in `protocol/fountain.js` and
 `native/core/qretina.hpp` to the identifier the tests print, and regenerate the vectors.

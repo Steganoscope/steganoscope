@@ -1,9 +1,9 @@
-// Transfer layer (spec/qretina.yaml): base45 frames and a dense GF(2) fountain code. A Receiver turns
+// Transfer layer (spec/steganoscope.yaml): base45 frames and a dense GF(2) fountain code. A Receiver turns
 // scanned strings back into containers; what a container holds is containers.js's business.
 // Pure JS with no platform APIs, so it runs unchanged in Node, Hermes and browsers.
 import { sha256 } from '@noble/hashes/sha2.js';
 
-// "QRT" + the first 6 hex digits of SHA-256 over spec/qretina.yaml `parameters` (checked by the tests).
+// "QRT" + the first 6 hex digits of SHA-256 over spec/steganoscope.yaml `parameters` (checked by the tests).
 export const PROTOCOL = 'QRT112C90';
 export const MAX_N = 4096, MAX_LEN = 1 << 22, MAX_B = 2900;
 

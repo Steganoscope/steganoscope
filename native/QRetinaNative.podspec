@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.summary      = package["description"]
   s.homepage     = "https://github.com/lucas-ebi/qretina"
   s.license      = package["license"]
-  s.authors      = "QRetina"
+  s.authors      = "Steganoscope"
   s.platforms    = { :ios => min_ios_version_supported }
   s.source       = { :git => "https://github.com/lucas-ebi/qretina.git", :tag => "#{s.version}" }
 

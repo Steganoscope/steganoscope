@@ -10,13 +10,13 @@ the rate. Missed codes do not matter, and neither does where in the broadcast yo
 completes once enough codes have been seen. Completed items go to the library.
 
 A broadcast usually starts with a few seconds of a code with a countdown in the middle. It is the
-link `https://qretina.app/SCAN`: scanned with the phone's own camera app, it opens QRetina on this
-screen, or a download page if QRetina is not installed.
+link `https://qretina.app/SCAN`: scanned with the phone's own camera app, it opens Steganoscope on this
+screen, or a download page if Steganoscope is not installed.
 
 ## Broadcast
 
 Choose an item from the library, or a file or photo, then start. You can also share a file to
-QRetina from another app, with the system's Share button, and broadcast it from there. Items can be
+Steganoscope from another app, with the system's Share button, and broadcast it from there. Items can be
 up to 4 MB after compression. Keep the screen facing the other
 camera, 20 to 40 cm away. Tap the screen to stop. Settings:
 
@@ -26,7 +26,7 @@ camera, 20 to 40 cm away. Tap the screen to stop. Settings:
 | Codes per second | 15 | Above the receiver's frame rate, codes are lost. |
 | Codes on screen | 1 | Two need a large screen, such as a tablet or laptop. |
 | Countdown | 3 s | Repeated every few loops, for phones that start late. |
-| Audience | Anyone with QRetina | Or a group key, to make the item private. |
+| Audience | Anyone with Steganoscope | Or a group key, to make the item private. |
 
 An item received from another phone is sent exactly as it arrived. Several phones can therefore
 relay one item at once, and a receiver combines their codes.
@@ -39,7 +39,7 @@ key this phone does not hold: it can still be relayed, and opens as soon as its 
 
 ## Programs
 
-A received HTML program runs only if it is signed by QRetina or by a publisher that QRetina certified,
+A received HTML program runs only if it is signed by Steganoscope or by a publisher that Steganoscope certified,
 and after you approve it the first time. It runs isolated: no network, no access to the library or
 to other apps' data. Older versions of a program than one already run are refused. Running programs
 can be turned off in Settings.
@@ -48,7 +48,7 @@ can be turned off in Settings.
 
 A private broadcast can be opened only by phones that hold its group key. Add keys in Settings
 beforehand, from a passphrase agreed in person or from a key file (made with
-`qretina.mjs key`). A key file can also be shared to QRetina from another app, such as a messenger
+`steganoscope.mjs key`). A key file can also be shared to Steganoscope from another app, such as a messenger
 or a file manager, which offers to add it. A passphrase must be long, several words: a recording of a broadcast lets anyone
 try guesses at leisure.
 

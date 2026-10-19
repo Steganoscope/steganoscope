@@ -1,4 +1,4 @@
-# QRetina transfer protocol: normative parameters.
+# Steganoscope transfer protocol: normative parameters.
 #
 # The protocol identifier is "QRT" followed by the first six hexadecimal digits, in upper case, of
 # SHA-256 over the canonical JSON (RFC 8785) of `parameters`. Any change to `parameters` gives a new

@@ -20,7 +20,7 @@ test('app/src/lib/vectors.json holds the current spec vectors', () => {
 const cxx = ['c++', 'g++', 'clang++'].find(c => spawnSync(c, ['--version']).status === 0);
 
 test('the C++ core reproduces the vectors', { skip: !cxx && 'no C++ compiler' }, () => {
-  const exe = join(mkdtempSync(join(tmpdir(), 'qretina-native-')), 'test');
+  const exe = join(mkdtempSync(join(tmpdir(), 'steganoscope-native-')), 'test');
   execFileSync(cxx, ['-std=c++17', '-O2', '-Wall', '-Wextra', '-Werror', '-o', exe, 'native/core/qretina.cpp', 'native/core/test.cpp'], { cwd: root });
   const out = execFileSync(exe, [file], { encoding: 'utf8' });
   console.log('  ' + out.trim());

@@ -9,7 +9,7 @@ import { AppProvider } from '../lib/state.tsx';
 import { engineError } from '../lib/engine.ts';
 import { Label, Screen, useColors } from '../components/ui.tsx';
 
-// Opens the share screen when another app shares a file to QRetina.
+// Opens the share screen when another app shares a file to Steganoscope.
 function IncomingShare() {
   const { sharedPayloads } = useIncomingShare();
   useEffect(() => { if (sharedPayloads.length) router.push('/share'); }, [sharedPayloads]);

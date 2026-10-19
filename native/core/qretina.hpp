@@ -1,4 +1,4 @@
-// QRetina transfer layer in C++ (spec/qretina.yaml `frame` and `code`): frames, the fountain encoder, the
+// Steganoscope transfer layer in C++ (spec/steganoscope.yaml `frame` and `code`): frames, the fountain encoder, the
 // GF(2) decoder and a receiver of interleaved streams. It produces the same frames and containers
 // as protocol/fountain.js, word for word, and is checked against test/vectors/streams.txt.
 // Containers are opened by the JS side; this layer only moves bytes.

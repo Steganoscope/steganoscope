@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Renders the QRetina brand assets from one definition of the mark (the fox eye, minimal: a winged
+// Renders the Steganoscope brand assets from one definition of the mark (the fox eye, minimal: a winged
 // upper lid hooding the iris, and catchlights shaped as a QR finder pattern). Run after changing the mark:
 //   node tools/brand.mjs
 // Writes brand/*.svg (the sources), the app's icons, splash images and mark (app/src/lib/mark.ts),
@@ -45,7 +45,7 @@ export function markBody({ liner = COLORS.liner, iris = COLORS.iris, id = 'q' } 
 
 export const markSvg = opts =>
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${VIEW.x} ${VIEW.y} ${VIEW.w} ${VIEW.h}" width="${VIEW.w * 4}" height="${VIEW.h * 4}">` +
-  `<title>QRetina</title>${markBody(opts)}</svg>\n`;
+  `<title>Steganoscope</title>${markBody(opts)}</svg>\n`;
 
 // A square canvas of `size` with the mark `width` wide in its centre, on `ground` (none: transparent).
 function square(size, width, { ground, ...opts } = {}) {

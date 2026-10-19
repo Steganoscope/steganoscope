@@ -22,7 +22,7 @@ for (const k of appKeys) if (!/^[A-Za-z0-9_-]{43}$/.test(k)) throw new Error('AP
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: 'QRetina',
+  name: 'Steganoscope',
   slug: 'qretina',
   scheme: 'qretina',
   version: '0.1.0',
@@ -57,13 +57,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       image: './assets/splash.png', imageWidth: 240, resizeMode: 'contain', backgroundColor: '#F4F7F9',
       dark: { image: './assets/splash-dark.png', backgroundColor: '#0A1E2C' },
     }],
-    ['expo-camera', { cameraPermission: 'QRetina films QR codes on another screen to receive files.', microphonePermission: false, recordAudioAndroid: false, barcodeScannerEnabled: true }],
+    ['expo-camera', { cameraPermission: 'Steganoscope films QR codes on another screen to receive files.', microphonePermission: false, recordAudioAndroid: false, barcodeScannerEnabled: true }],
     // No cameraPermission: false here, which would remove the camera permission for the whole app.
-    ['expo-image-picker', { photosPermission: 'QRetina sends photos you choose as QR codes.', microphonePermission: false }],
+    ['expo-image-picker', { photosPermission: 'Steganoscope sends photos you choose as QR codes.', microphonePermission: false }],
     ['expo-audio', { microphonePermission: false, recordAudioAndroid: false, enableBackgroundPlayback: false }],
     'expo-video',
     'expo-secure-store',
-    // Other apps can share a file to QRetina, to broadcast it, or a key file, to add it.
+    // Other apps can share a file to Steganoscope, to broadcast it, or a key file, to add it.
     ['expo-sharing', {
       ios: { enabled: true, activationRule: { supportsFileWithMaxCount: 1, supportsImageWithMaxCount: 1, supportsMovieWithMaxCount: 1 } },
       android: { enabled: true, singleShareMimeTypes: ['*/*'] },

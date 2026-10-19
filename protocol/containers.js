@@ -1,4 +1,4 @@
-// Containers (spec/qretina.yaml `containers`): signed code, files, certificates, revocation lists and
+// Containers (spec/steganoscope.yaml `containers`): signed code, files, certificates, revocation lists and
 // sealed (encrypted) containers. Pure JS. Code runs only when signed by a root key, or by a
 // publisher whose certificate a root key issued; files are data and are never run, whatever their type.
 import { xchacha20poly1305 } from '@noble/ciphers/chacha.js';

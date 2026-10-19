@@ -12,5 +12,5 @@ export const bundledCrl: Crl | undefined = (() => {
   try { return extra.crl ? openContainer(b64url(extra.crl), { roots: rootKeys, keys: appKeys }).crl : undefined; } catch { return undefined; }
 })();
 
-// The link shown in the countdown before a broadcast; it opens QRetina on the Receive screen.
+// The link shown in the countdown before a broadcast; it opens Steganoscope on the Receive screen.
 export const LINK = 'HTTPS://QRETINA.APP/SCAN';

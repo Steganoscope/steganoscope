@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Writes the test vectors other implementations check themselves against, deterministically, so
 // test/native.test.mjs can check the files are current:
-//   app/src/lib/vectors.json  the vectors of spec/qretina.yaml, for the app's self-test on devices
+//   app/src/lib/vectors.json  the vectors of spec/steganoscope.yaml, for the app's self-test on devices
 //   test/vectors/streams.txt  streams from the reference implementation, for native/core, one record per line:
 //   case <name> <block>        a new stream
 //   container <hex>            its container
@@ -45,7 +45,7 @@ export function vectors() {
 }
 
 export const appVectors = () =>
-  JSON.stringify({ protocol: PROTOCOL, ...parse(readFileSync(new URL('../spec/qretina.yaml', import.meta.url), 'utf8')).vectors }, null, 2) + '\n';
+  JSON.stringify({ protocol: PROTOCOL, ...parse(readFileSync(new URL('../spec/steganoscope.yaml', import.meta.url), 'utf8')).vectors }, null, 2) + '\n';
 
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
   writeFileSync(new URL('../test/vectors/streams.txt', import.meta.url), vectors());

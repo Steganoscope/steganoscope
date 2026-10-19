@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-// QRetina command line: keys, signing, and frames or looping GIFs for broadcasting from a computer.
+// Steganoscope command line: keys, signing, and frames or looping GIFs for broadcasting from a computer.
 //
-//   node tools/qretina.mjs keygen [signing-key.json | -]
-//   node tools/qretina.mjs sign <file> --id <name> [--type html|json] [--version N] [--cert pub.cert] [key] [output]
-//   node tools/qretina.mjs file <file> [--name N] [--mime M] [output]
-//   node tools/qretina.mjs cert --pub <public key> --name <publisher> --ns <id prefix> [--days 365] [--serial N] [key] --out pub.cert
-//   node tools/qretina.mjs crl --number N [--revoke serial,serial...] [key] [output]
-//   node tools/qretina.mjs key [--passphrase P] [--label L] --out group.qretinakey
+//   node tools/steganoscope.mjs keygen [signing-key.json | -]
+//   node tools/steganoscope.mjs sign <file> --id <name> [--type html|json] [--version N] [--cert pub.cert] [key] [output]
+//   node tools/steganoscope.mjs file <file> [--name N] [--mime M] [output]
+//   node tools/steganoscope.mjs cert --pub <public key> --name <publisher> --ns <id prefix> [--days 365] [--serial N] [key] --out pub.cert
+//   node tools/steganoscope.mjs crl --number N [--revoke serial,serial...] [key] [output]
+//   node tools/steganoscope.mjs key [--passphrase P] [--label L] --out group.qretinakey
 //
 //   key:    [--key signing-key.json]
 //   output: [--private group.qretinakey] [--out container.bin] [--block 700] [--frames N]
@@ -146,12 +146,12 @@ async function main([cmd, ...argv]) {
     const name = opt.name ?? basename(pos[0]);
     await output(packFile(name, opt.mime ?? mimeOf(name), await readFile(pos[0])), opt);
   } else {
-    console.error('usage: qretina.mjs keygen [file | -]\n' +
-      '       qretina.mjs sign <file> --id <name> [--type html|json] [--version N] [--cert pub.cert] [key] [output]\n' +
-      '       qretina.mjs file <file> [--name N] [--mime M] [output]\n' +
-      '       qretina.mjs cert --pub <public key> --name <publisher> --ns <id prefix> [--days 365] [--serial N] [key] --out pub.cert\n' +
-      '       qretina.mjs crl --number N [--revoke serial,serial...] [key] [output]\n' +
-      '       qretina.mjs key [--passphrase P] [--label L] --out group.qretinakey\n' +
+    console.error('usage: steganoscope.mjs keygen [file | -]\n' +
+      '       steganoscope.mjs sign <file> --id <name> [--type html|json] [--version N] [--cert pub.cert] [key] [output]\n' +
+      '       steganoscope.mjs file <file> [--name N] [--mime M] [output]\n' +
+      '       steganoscope.mjs cert --pub <public key> --name <publisher> --ns <id prefix> [--days 365] [--serial N] [key] --out pub.cert\n' +
+      '       steganoscope.mjs crl --number N [--revoke serial,serial...] [key] [output]\n' +
+      '       steganoscope.mjs key [--passphrase P] [--label L] --out group.qretinakey\n' +
       'key:    [--key signing-key.json]\n' +
       'output: [--private group.qretinakey] [--out file] [--block B] [--frames N] [--gif out.gif [--scale S] [--fps F] [--ecc L|M|Q|H] [--intro 0-9] [--link URL]]');
     process.exit(1);

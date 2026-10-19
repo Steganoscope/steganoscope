@@ -1,6 +1,6 @@
 # Protocol
 
-The normative parameters are in [`spec/qretina.yaml`](https://github.com/lucas-ebi/qretina/blob/main/spec/qretina.yaml).
+The normative parameters are in [`spec/steganoscope.yaml`](https://github.com/lucas-ebi/qretina/blob/main/spec/steganoscope.yaml).
 This page explains them. The key words MUST, MUST NOT, SHOULD and MAY are used as in RFC 2119.
 
 ## Identifier

@@ -1,4 +1,4 @@
-// The QRetina mark, drawn from the same SVG as the icons (tools/brand.mjs).
+// The Steganoscope mark, drawn from the same SVG as the icons (tools/brand.mjs).
 import { Canvas, ImageSVG, Skia } from '@shopify/react-native-skia';
 import { useMemo } from 'react';
 import { useColorScheme } from 'react-native';
@@ -9,7 +9,7 @@ export function Mark({ width }: { width: number }) {
   const svg = useMemo(() => Skia.SVG.MakeFromString(dark ? MARK_DARK : MARK), [dark]);
   const height = (width * 84) / 216;
   return (
-    <Canvas style={{ width, height }} accessibilityLabel="QRetina">
+    <Canvas style={{ width, height }} accessibilityLabel="Steganoscope">
       {svg && <ImageSVG svg={svg} x={0} y={0} width={width} height={height} />}
     </Canvas>
   );

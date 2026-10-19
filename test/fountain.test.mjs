@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { randomBytes } from 'node:crypto';
 import { Decoder, MAX_N, PROTOCOL, Receiver, b45decode, b45encode, blockFor, encoder, mask, parseFrame } from '../protocol/fountain.js';
 import { packFile } from '../protocol/containers.js';
-import { makeFrames } from '../tools/qretina.mjs';
+import { makeFrames } from '../tools/steganoscope.mjs';
 import { enc, receive, shuffle } from './helpers/stream.mjs';
 
 const noise = n => new Uint8Array(randomBytes(n));
