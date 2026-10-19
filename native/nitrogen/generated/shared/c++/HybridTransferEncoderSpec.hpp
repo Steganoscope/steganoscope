@@ -17,7 +17,7 @@
 
 #include <string>
 
-namespace margelo::nitro::qretinanative {
+namespace margelo::nitro::steganoscopenative {
 
   using namespace margelo::nitro;
 
@@ -62,4 +62,4 @@ namespace margelo::nitro::qretinanative {
       static constexpr auto TAG = "TransferEncoder";
   };
 
-} // namespace margelo::nitro::qretinanative
+} // namespace margelo::nitro::steganoscopenative

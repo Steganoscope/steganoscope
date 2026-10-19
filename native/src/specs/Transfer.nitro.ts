@@ -1,4 +1,4 @@
-// The native transfer layer (core/qretina.hpp) as seen from JavaScript. `npm run codegen` turns
+// The native transfer layer (core/steganoscope.hpp) as seen from JavaScript. `npm run codegen` turns
 // this into the C++ interfaces that cpp/ implements.
 import type { HybridObject } from 'react-native-nitro-modules'
 

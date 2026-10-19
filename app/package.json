@@ -1,10 +1,10 @@
 {
-  "name": "@qretina/app",
+  "name": "@steganoscope/app",
   "version": "1.0.0",
   "main": "expo-router/entry",
   "dependencies": {
-    "@qretina/native": "*",
-    "@qretina/protocol": "*",
+    "@steganoscope/native": "*",
+    "@steganoscope/protocol": "*",
     "@shopify/react-native-skia": "2.6.2",
     "expo": "~57.0.25",
     "expo-audio": "~57.0.5",

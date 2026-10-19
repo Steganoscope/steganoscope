@@ -9,7 +9,7 @@ lets the receiver miss any codes and start at any point; it needs about n + 2 co
 - Protocol specified in `spec/steganoscope.yaml`, with a reference implementation in JavaScript and the
   transfer layer in C++.
 
-Documentation: [docs.qretina.app](https://docs.qretina.app) (sources in [docs/](docs/index.md)).
+Documentation: [docs.steganoscope.app](https://docs.steganoscope.app) (sources in [docs/](docs/index.md)).
 
 ## Build and test
 
@@ -18,7 +18,7 @@ Node 22.18 or newer.
 ```
 npm install
 npm test
-npm run typecheck -w @qretina/app
+npm run typecheck -w @steganoscope/app
 cd app && npx expo run:android      # or run:ios, on macOS
 ```
 

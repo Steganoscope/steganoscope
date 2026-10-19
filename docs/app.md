@@ -10,7 +10,7 @@ the rate. Missed codes do not matter, and neither does where in the broadcast yo
 completes once enough codes have been seen. Completed items go to the library.
 
 A broadcast usually starts with a few seconds of a code with a countdown in the middle. It is the
-link `https://qretina.app/SCAN`: scanned with the phone's own camera app, it opens Steganoscope on this
+link `https://steganoscope.app/SCAN`: scanned with the phone's own camera app, it opens Steganoscope on this
 screen, or a download page if Steganoscope is not installed.
 
 ## Broadcast

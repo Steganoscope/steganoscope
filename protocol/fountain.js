@@ -3,8 +3,8 @@
 // Pure JS with no platform APIs, so it runs unchanged in Node, Hermes and browsers.
 import { sha256 } from '@noble/hashes/sha2.js';
 
-// "QRT" + the first 6 hex digits of SHA-256 over spec/steganoscope.yaml `parameters` (checked by the tests).
-export const PROTOCOL = 'QRT112C90';
+// "STG" + the first 6 hex digits of SHA-256 over spec/steganoscope.yaml `parameters` (checked by the tests).
+export const PROTOCOL = 'STG0D97A4';
 export const MAX_N = 4096, MAX_LEN = 1 << 22, MAX_B = 2900;
 
 // ---- PRNG and coefficient masks --------------------------------------------

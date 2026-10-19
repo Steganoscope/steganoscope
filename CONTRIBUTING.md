@@ -20,7 +20,7 @@ npm test
   (`@noble/*`, `fflate`). Open a discussion before adding another.
 - **Protocol changes.** Any change to what is transmitted (frames, containers, the PRNG or the
   masks) is made in `parameters` of `spec/steganoscope.yaml`. This gives a new protocol identifier, which
-  must be recorded as `PROTOCOL` in `protocol/fountain.js` and `native/core/qretina.hpp`, together
+  must be recorded as `PROTOCOL` in `protocol/fountain.js` and `native/core/steganoscope.hpp`, together
   with updated test vectors.
 - **Security-sensitive code** (`protocol/containers.js`, the `Receiver`, `tools/`,
   `.github/workflows/`) needs tests that show the adverse case being refused, not only the intended

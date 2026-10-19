@@ -34,7 +34,7 @@
 #include <NitroModules/ArrayBuffer.hpp>
 #include <optional>
 
-namespace margelo::nitro::qretinanative {
+namespace margelo::nitro::steganoscopenative {
 
   /**
    * A struct which can be represented as a JavaScript object (Assembled).
@@ -53,22 +53,22 @@ namespace margelo::nitro::qretinanative {
     friend bool operator==(const Assembled& lhs, const Assembled& rhs) = default;
   };
 
-} // namespace margelo::nitro::qretinanative
+} // namespace margelo::nitro::steganoscopenative
 
 namespace margelo::nitro {
 
   // C++ Assembled <> JS Assembled (object)
   template <>
-  struct JSIConverter<margelo::nitro::qretinanative::Assembled> final {
-    static inline margelo::nitro::qretinanative::Assembled fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
+  struct JSIConverter<margelo::nitro::steganoscopenative::Assembled> final {
+    static inline margelo::nitro::steganoscopenative::Assembled fromJSI(jsi::Runtime& runtime, const jsi::Value& arg) {
       jsi::Object obj = arg.asObject(runtime);
-      return margelo::nitro::qretinanative::Assembled(
+      return margelo::nitro::steganoscopenative::Assembled(
         JSIConverter<std::string>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "id"))),
         JSIConverter<std::optional<std::shared_ptr<ArrayBuffer>>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "container"))),
         JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "error")))
       );
     }
-    static inline jsi::Value toJSI(jsi::Runtime& runtime, const margelo::nitro::qretinanative::Assembled& arg) {
+    static inline jsi::Value toJSI(jsi::Runtime& runtime, const margelo::nitro::steganoscopenative::Assembled& arg) {
       jsi::Object obj(runtime);
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "id"), JSIConverter<std::string>::toJSI(runtime, arg.id));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "container"), JSIConverter<std::optional<std::shared_ptr<ArrayBuffer>>>::toJSI(runtime, arg.container));

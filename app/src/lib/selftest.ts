@@ -1,8 +1,8 @@
 // Checks the protocol against the spec's vectors on the device itself, and times a transfer. The
 // libraries it exercises (SHA-256, Ed25519, XChaCha20-Poly1305, scrypt, deflate) are the ones whose
 // behaviour under Hermes cannot be tested anywhere else.
-import { PROTOCOL, b45encode, blockFor, hex, mask, mulberry32, streamId } from '@qretina/protocol/fountain.js';
-import { keyFromPassphrase, keyId, loadKey, openContainer, packFile, seal, signCode, toB64url } from '@qretina/protocol/containers.js';
+import { PROTOCOL, b45encode, blockFor, hex, mask, mulberry32, streamId } from '@steganoscope/protocol/fountain.js';
+import { keyFromPassphrase, keyId, loadKey, openContainer, packFile, seal, signCode, toB64url } from '@steganoscope/protocol/containers.js';
 import { ed25519 } from '@noble/curves/ed25519.js';
 import v from './vectors.json' with { type: 'json' };
 import type { Engine } from './engine.ts';

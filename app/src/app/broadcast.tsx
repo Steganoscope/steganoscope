@@ -8,7 +8,7 @@ import { useKeepAwake } from 'expo-keep-awake';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Alert, Pressable, ScrollView, Text, View, useWindowDimensions } from 'react-native';
-import { blockFor, type Encoder } from '@qretina/protocol/fountain.js';
+import { blockFor, type Encoder } from '@steganoscope/protocol/fountain.js';
 import { engine } from '../lib/engine.ts';
 import { QrCode } from '../components/QrCode.tsx';
 import { Button, Card, Label, kb, useColors } from '../components/ui.tsx';

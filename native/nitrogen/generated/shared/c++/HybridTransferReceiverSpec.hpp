@@ -14,16 +14,16 @@
 #endif
 
 // Forward declaration of `Pushed` to properly resolve imports.
-namespace margelo::nitro::qretinanative { struct Pushed; }
+namespace margelo::nitro::steganoscopenative { struct Pushed; }
 // Forward declaration of `Assembled` to properly resolve imports.
-namespace margelo::nitro::qretinanative { struct Assembled; }
+namespace margelo::nitro::steganoscopenative { struct Assembled; }
 
 #include "Pushed.hpp"
 #include <string>
 #include "Assembled.hpp"
 #include <NitroModules/Promise.hpp>
 
-namespace margelo::nitro::qretinanative {
+namespace margelo::nitro::steganoscopenative {
 
   using namespace margelo::nitro;
 
@@ -67,4 +67,4 @@ namespace margelo::nitro::qretinanative {
       static constexpr auto TAG = "TransferReceiver";
   };
 
-} // namespace margelo::nitro::qretinanative
+} // namespace margelo::nitro::steganoscopenative

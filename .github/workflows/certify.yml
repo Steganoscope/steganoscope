@@ -67,8 +67,8 @@ jobs:
               --out "$RUNNER_TEMP/out/crl.bin"
           fi
         env:
-          QRETINA_SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
-          QRETINA_APP_KEY: ${{ secrets.APP_KEY }}
+          STEGANOSCOPE_SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          STEGANOSCOPE_APP_KEY: ${{ secrets.APP_KEY }}
           ACTION: ${{ inputs.action }}
           PUB: ${{ inputs.pub }}
           NAME: ${{ inputs.name }}

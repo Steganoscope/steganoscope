@@ -57,8 +57,8 @@ jobs:
           node tools/steganoscope.mjs sign "$FILE" --id "$APP_ID" --block "$BLOCK" \
             ${VERSION:+--version "$VERSION"} --intro "$INTRO" --gif "$RUNNER_TEMP/$APP_ID.gif"
         env:
-          QRETINA_SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
-          QRETINA_APP_KEY: ${{ secrets.APP_KEY }}
+          STEGANOSCOPE_SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          STEGANOSCOPE_APP_KEY: ${{ secrets.APP_KEY }}
           FILE: ${{ inputs.file }}
           APP_ID: ${{ inputs.id }}
           VERSION: ${{ inputs.version }}

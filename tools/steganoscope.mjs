@@ -6,20 +6,20 @@
 //   node tools/steganoscope.mjs file <file> [--name N] [--mime M] [output]
 //   node tools/steganoscope.mjs cert --pub <public key> --name <publisher> --ns <id prefix> [--days 365] [--serial N] [key] --out pub.cert
 //   node tools/steganoscope.mjs crl --number N [--revoke serial,serial...] [key] [output]
-//   node tools/steganoscope.mjs key [--passphrase P] [--label L] --out group.qretinakey
+//   node tools/steganoscope.mjs key [--passphrase P] [--label L] --out group.steganoscopekey
 //
 //   key:    [--key signing-key.json]
-//   output: [--private group.qretinakey] [--out container.bin] [--block 700] [--frames N]
-//           [--gif out.gif [--scale 8] [--fps 10] [--ecc L] [--intro 3] [--link HTTPS://QRETINA.APP/SCAN]]
+//   output: [--private group.steganoscopekey] [--out container.bin] [--block 700] [--frames N]
+//           [--gif out.gif [--scale 8] [--fps 10] [--ecc L] [--intro 3] [--link HTTPS://STEGANOSCOPE.APP/SCAN]]
 //
 // `keygen -` prints the private key to stdout (to pipe into `gh secret set`) and the public key to
-// stderr. Signing commands read the private key from --key, else QRETINA_SIGNING_KEY (used by CI),
+// stderr. Signing commands read the private key from --key, else STEGANOSCOPE_SIGNING_KEY (used by CI),
 // else ./signing-key.json. `cert` and `crl` need a root key (one listed in TRUSTED_KEYS); `sign`
 // takes a root key, or a publisher key with --cert. --out writes the container itself; otherwise
 // frames are printed one per line, or with --gif written as a GIF that loops forever, each loop
 // starting with --intro seconds (0 to 9) of countdown QR codes of --link, which open the app.
 //
-// Output is sealed with the app key from QRETINA_APP_KEY (base64url, 32 bytes), as the app seals
+// Output is sealed with the app key from STEGANOSCOPE_APP_KEY (base64url, 32 bytes), as the app seals
 // everything it sends; --private first seals it with a group key made by `key`, which receivers
 // must already hold.
 import { readFile, writeFile } from 'node:fs/promises';
@@ -31,7 +31,7 @@ import { blockFor, encoder } from '../protocol/fountain.js';
 import { encodeGif, renderFrames, renderIntro } from '../protocol/gif.js';
 
 // Upper case keeps the link in the QR alphanumeric mode, which makes the countdown codes smaller.
-export const LINK = 'HTTPS://QRETINA.APP/SCAN';
+export const LINK = 'HTTPS://STEGANOSCOPE.APP/SCAN';
 
 const MIME = {
   txt: 'text/plain', md: 'text/markdown', csv: 'text/csv', html: 'text/html', json: 'application/json',
@@ -62,14 +62,14 @@ async function readSealKey(file) {
 }
 
 function appKey() {
-  if (!process.env.QRETINA_APP_KEY) return null;
-  const key = b64url(process.env.QRETINA_APP_KEY);
-  if (key.length !== 32) throw new Error('QRETINA_APP_KEY must be 32 bytes, base64url');
+  if (!process.env.STEGANOSCOPE_APP_KEY) return null;
+  const key = b64url(process.env.STEGANOSCOPE_APP_KEY);
+  if (key.length !== 32) throw new Error('STEGANOSCOPE_APP_KEY must be 32 bytes, base64url');
   return key;
 }
 
 async function readKey(opt) {
-  const fromEnv = !opt.key && process.env.QRETINA_SIGNING_KEY;
+  const fromEnv = !opt.key && process.env.STEGANOSCOPE_SIGNING_KEY;
   return JSON.parse(fromEnv || await readFile(opt.key ?? 'signing-key.json', 'utf8'));
 }
 
@@ -93,7 +93,7 @@ async function output(container, opt) {
   const app = appKey();
   if (opt.private) container = seal(await readSealKey(opt.private), container);
   if (app) container = seal(app, container);
-  else console.error('warning: not sealed with the app key (QRETINA_APP_KEY is not set)');
+  else console.error('warning: not sealed with the app key (STEGANOSCOPE_APP_KEY is not set)');
   if (opt.intro !== undefined && !/^[0-9]$/.test(opt.intro)) throw new Error('--intro must be a whole number of seconds from 0 to 9');
   if (opt.link !== undefined && !/^[a-z][a-z0-9+.-]*:\S+$/i.test(opt.link)) throw new Error('--link must be a URL');
   if (opt.out) {
@@ -151,9 +151,9 @@ async function main([cmd, ...argv]) {
       '       steganoscope.mjs file <file> [--name N] [--mime M] [output]\n' +
       '       steganoscope.mjs cert --pub <public key> --name <publisher> --ns <id prefix> [--days 365] [--serial N] [key] --out pub.cert\n' +
       '       steganoscope.mjs crl --number N [--revoke serial,serial...] [key] [output]\n' +
-      '       steganoscope.mjs key [--passphrase P] [--label L] --out group.qretinakey\n' +
+      '       steganoscope.mjs key [--passphrase P] [--label L] --out group.steganoscopekey\n' +
       'key:    [--key signing-key.json]\n' +
-      'output: [--private group.qretinakey] [--out file] [--block B] [--frames N] [--gif out.gif [--scale S] [--fps F] [--ecc L|M|Q|H] [--intro 0-9] [--link URL]]');
+      'output: [--private group.steganoscopekey] [--out file] [--block B] [--frames N] [--gif out.gif [--scale S] [--fps F] [--ecc L|M|Q|H] [--intro 0-9] [--link URL]]');
     process.exit(1);
   }
 }

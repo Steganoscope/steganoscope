@@ -1,8 +1,8 @@
 {
   "$schema": "https://nitro.margelo.com/nitro.schema.json",
-  "cxxNamespace": ["qretinanative"],
-  "ios": { "iosModuleName": "QRetinaNative" },
-  "android": { "androidNamespace": ["qretinanative"], "androidCxxLibName": "QRetinaNative" },
+  "cxxNamespace": ["steganoscopenative"],
+  "ios": { "iosModuleName": "SteganoscopeNative" },
+  "android": { "androidNamespace": ["steganoscopenative"], "androidCxxLibName": "SteganoscopeNative" },
   "autolinking": {
     "Transfer": { "all": { "language": "c++", "implementationClassName": "HybridTransfer" } }
   },

@@ -1,11 +1,11 @@
-#include "qretina.hpp"
+#include "steganoscope.hpp"
 
 #include <algorithm>
 #include <cstring>
 #include <limits>
 #include <stdexcept>
 
-namespace qretina {
+namespace steganoscope {
 
 // ---- PRNG and masks -------------------------------------------------------------------
 
@@ -291,4 +291,4 @@ Pushed Receiver::assemble(const std::string &id, Decoder &d) {
   return r;
 }
 
-}  // namespace qretina
+}  // namespace steganoscope

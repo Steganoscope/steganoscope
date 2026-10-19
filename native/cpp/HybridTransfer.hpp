@@ -1,12 +1,12 @@
-// The Nitro objects of src/specs/Transfer.nitro.ts, over the transfer layer in core/qretina.hpp.
+// The Nitro objects of src/specs/Transfer.nitro.ts, over the transfer layer in core/steganoscope.hpp.
 #pragma once
 #include <mutex>
 #include "HybridTransferEncoderSpec.hpp"
 #include "HybridTransferReceiverSpec.hpp"
 #include "HybridTransferSpec.hpp"
-#include "qretina.hpp"
+#include "steganoscope.hpp"
 
-namespace margelo::nitro::qretinanative {
+namespace margelo::nitro::steganoscopenative {
 
 class HybridTransfer : public HybridTransferSpec {
  public:
@@ -27,12 +27,12 @@ class HybridTransferReceiver : public HybridTransferReceiverSpec {
 
  private:
   std::mutex lock_;
-  ::qretina::Receiver rx_;
+  ::steganoscope::Receiver rx_;
 };
 
 class HybridTransferEncoder : public HybridTransferEncoderSpec {
  public:
-  HybridTransferEncoder(const ::qretina::Bytes& container, uint32_t block) : HybridObject(TAG), enc_(container, block) {}
+  HybridTransferEncoder(const ::steganoscope::Bytes& container, uint32_t block) : HybridObject(TAG), enc_(container, block) {}
   std::string getId() override { return enc_.id; }
   double getN() override { return enc_.n; }
   double getB() override { return enc_.b; }
@@ -40,7 +40,7 @@ class HybridTransferEncoder : public HybridTransferEncoderSpec {
   std::string frame(double seed) override;
 
  private:
-  ::qretina::Encoder enc_;
+  ::steganoscope::Encoder enc_;
 };
 
-}  // namespace margelo::nitro::qretinanative
+}  // namespace margelo::nitro::steganoscopenative

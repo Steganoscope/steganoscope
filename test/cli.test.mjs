@@ -28,16 +28,16 @@ test('keygen - prints the private key to stdout, the public key to stderr, and w
   assert.deepEqual(await readdir(cwd), []);
 });
 
-test('sign uses QRETINA_SIGNING_KEY (as in CI), and the frames decode under the public key', async () => {
+test('sign uses STEGANOSCOPE_SIGNING_KEY (as in CI), and the frames decode under the public key', async () => {
   const { stdout: key } = await node(['keygen', '-']);
-  const { stdout, stderr: log } = await node(['sign', snake, '--id', 'snake', '--version', '7'], { QRETINA_SIGNING_KEY: key });
+  const { stdout, stderr: log } = await node(['sign', snake, '--id', 'snake', '--version', '7'], { STEGANOSCOPE_SIGNING_KEY: key });
   assert.ok(!log.includes(JSON.parse(key).d), 'log never contains the private key');
   const r = receive(stdout.trim().split('\n'), { roots: [loadKey(JSON.parse(key).x)] });
   assert.deepEqual([r?.code?.id, r?.code?.version, r?.code?.type], ['snake', 7, 'html'], JSON.stringify(r));
 });
 
 test('sign with no key anywhere fails instead of signing with something else', async () => {
-  await assert.rejects(node(['sign', snake, '--id', 'snake'], { QRETINA_SIGNING_KEY: '' }, await tmp()), /ENOENT|signing-key/);
+  await assert.rejects(node(['sign', snake, '--id', 'snake'], { STEGANOSCOPE_SIGNING_KEY: '' }, await tmp()), /ENOENT|signing-key/);
 });
 
 test('file packs any file, guessing its type from the name', async () => {
@@ -66,9 +66,9 @@ test('--intro 0 leaves the countdown out, and --link changes it', async () => {
   await node(['file', snake, '--gif', join(dir, 'a.gif'), '--intro', '0']);
   let gif = parseGif(new Uint8Array(await readFile(join(dir, 'a.gif'))));
   assert.ok(readQr(gif.frames[0].pixels, gif.width, gif.height).startsWith(PROTOCOL + '/'));
-  await node(['file', snake, '--gif', join(dir, 'b.gif'), '--intro', '2', '--link', 'qretina://scan']);
+  await node(['file', snake, '--gif', join(dir, 'b.gif'), '--intro', '2', '--link', 'steganoscope://scan']);
   gif = parseGif(new Uint8Array(await readFile(join(dir, 'b.gif'))));
-  assert.equal(readQr(gif.frames[1].pixels, gif.width, gif.height), 'qretina://scan');
+  assert.equal(readQr(gif.frames[1].pixels, gif.width, gif.height), 'steganoscope://scan');
 });
 
 test('--gif options are validated before anything is written', async () => {
@@ -99,10 +99,10 @@ test('publisher flow: a root certifies a publisher, whose programs open until re
   }), /may not publish/);
 });
 
-test('with QRETINA_APP_KEY, output is sealed; --private adds a group layer only key holders open', async () => {
-  const dir = await tmp(), group = join(dir, 'g.qretinakey'), app = crypto.getRandomValues(new Uint8Array(32));
+test('with STEGANOSCOPE_APP_KEY, output is sealed; --private adds a group layer only key holders open', async () => {
+  const dir = await tmp(), group = join(dir, 'g.steganoscopekey'), app = crypto.getRandomValues(new Uint8Array(32));
   await node(['key', '--label', 'Shelter 4', '--out', group]);
-  const env = { QRETINA_APP_KEY: toB64url(app) }, groupKey = b64url(JSON.parse(await readFile(group, 'utf8')).key);
+  const env = { STEGANOSCOPE_APP_KEY: toB64url(app) }, groupKey = b64url(JSON.parse(await readFile(group, 'utf8')).key);
   const notes = join(dir, 'n.txt');
   await writeFile(notes, 'roll call at 8');
   const plain = (await node(['file', notes], env)).stdout.trim().split('\n');

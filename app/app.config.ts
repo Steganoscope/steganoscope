@@ -3,7 +3,7 @@
 //                 or by publishers they certify, may run.
 //   APP_KEYS      sealing keys (base64url, 32 bytes), comma-separated, current first; everything
 //                 sent is sealed with the first, and any of them opens what is received.
-//   QRETINA_RELEASE set to 1 for store builds: the keys become mandatory and Android loses the
+//   STEGANOSCOPE_RELEASE set to 1 for store builds: the keys become mandatory and Android loses the
 //                 INTERNET permission, which only the development server needs.
 // The newest revocation list, when release/crl.bin exists (from certify.yml), ships with the app,
 // so phones know of revocations before any reaches them over the air.
@@ -11,7 +11,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import type { ConfigContext, ExpoConfig } from 'expo/config';
 
 const list = (v?: string) => (v ?? '').split(/[\s,]+/).filter(Boolean);
-const release = process.env.QRETINA_RELEASE === '1' || process.env.EAS_BUILD_PROFILE === 'production';
+const release = process.env.STEGANOSCOPE_RELEASE === '1' || process.env.EAS_BUILD_PROFILE === 'production';
 const rootKeys = list(process.env.TRUSTED_KEYS), appKeys = list(process.env.APP_KEYS);
 const crlFile = new URL('./release/crl.bin', import.meta.url);
 const crl = existsSync(crlFile) ? readFileSync(crlFile).toString('base64url') : undefined;
@@ -23,19 +23,19 @@ for (const k of appKeys) if (!/^[A-Za-z0-9_-]{43}$/.test(k)) throw new Error('AP
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: 'Steganoscope',
-  slug: 'qretina',
-  scheme: 'qretina',
+  slug: 'steganoscope',
+  scheme: 'steganoscope',
   version: '0.1.0',
   orientation: 'portrait',
   icon: './assets/icon.png',
   userInterfaceStyle: 'automatic',
   ios: {
-    bundleIdentifier: 'app.qretina',
+    bundleIdentifier: 'app.steganoscope',
     supportsTablet: true,
-    associatedDomains: ['applinks:qretina.app'],
+    associatedDomains: ['applinks:steganoscope.app'],
   },
   android: {
-    package: 'app.qretina',
+    package: 'app.steganoscope',
     adaptiveIcon: { foregroundImage: './assets/adaptive-icon.png', backgroundColor: '#F4F7F9' },
     // Only the camera is needed. The app sets its own window's brightness, not the system's; the
     // development server needs the network and overlays, which release builds drop.
@@ -48,7 +48,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       action: 'VIEW',
       autoVerify: true,
       category: ['BROWSABLE', 'DEFAULT'],
-      data: [{ scheme: 'https', host: 'qretina.app', pathPrefix: '/SCAN' }, { scheme: 'https', host: 'qretina.app', pathPrefix: '/scan' }],
+      data: [{ scheme: 'https', host: 'steganoscope.app', pathPrefix: '/SCAN' }, { scheme: 'https', host: 'steganoscope.app', pathPrefix: '/scan' }],
     }],
   },
   plugins: [

@@ -3,7 +3,7 @@ import { File } from 'expo-file-system';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { Alert, ScrollView, Switch, TextInput, View } from 'react-native';
-import { b64url, keyFromPassphrase, keyId } from '@qretina/protocol/containers.js';
+import { b64url, keyFromPassphrase, keyId } from '@steganoscope/protocol/containers.js';
 import { Button, Card, Label, useColors } from '../components/ui.tsx';
 import { Mark } from '../components/Mark.tsx';
 import Constants from 'expo-constants';

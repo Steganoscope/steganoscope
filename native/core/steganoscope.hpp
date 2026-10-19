@@ -13,9 +13,9 @@
 #include <unordered_set>
 #include <vector>
 
-namespace qretina {
+namespace steganoscope {
 
-inline constexpr std::string_view PROTOCOL = "QRT112C90";
+inline constexpr std::string_view PROTOCOL = "STG0D97A4";
 inline constexpr uint32_t MAX_N = 4096, MAX_LEN = 1u << 22, MAX_B = 2900;
 
 using Bytes = std::vector<uint8_t>;
@@ -94,4 +94,4 @@ class Receiver {
   std::unordered_map<std::string, double> closed_; // stream id -> ignored until this time
 };
 
-}  // namespace qretina
+}  // namespace steganoscope

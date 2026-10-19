@@ -1,7 +1,7 @@
 // The transfer layer the app runs on: the native one (native/, C++). It is built into every release;
 // without it the app does not start (_layout.tsx), rather than running a hundred times slower.
-import { loadTransfer } from '@qretina/native';
-import type { Encoder, Pushed } from '@qretina/protocol/fountain.js';
+import { loadTransfer } from '@steganoscope/native';
+import type { Encoder, Pushed } from '@steganoscope/protocol/fountain.js';
 
 // What the inbox needs from a receiver. push() is called for every scanned string; finish()
 // reassembles a stream reported ready, off the JavaScript thread.

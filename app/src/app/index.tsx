@@ -4,7 +4,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import { router, useIsFocused } from 'expo-router';
 import { useCallback, useRef, useState } from 'react';
 import { Alert, View } from 'react-native';
-import type { Progress } from '@qretina/protocol/fountain.js';
+import type { Progress } from '@steganoscope/protocol/fountain.js';
 import { Button, Card, Label, Screen, kb, useColors } from '../components/ui.tsx';
 import { useBusy } from '../lib/busy.tsx';
 import type { Event } from '../lib/inbox.ts';

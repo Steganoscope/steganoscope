@@ -1,7 +1,7 @@
 {
   "name": "steganoscope",
   "license": "MIT",
-  "repository": "github:lucas-ebi/qretina",
+  "repository": "github:lucas-ebi/steganoscope",
   "private": true,
   "type": "module",
   "workspaces": [
@@ -10,8 +10,8 @@
     "app"
   ],
   "scripts": {
-    "test": "node --test test/*.test.mjs && npm test -w @qretina/app",
-    "check": "npm test && npm run typecheck -w @qretina/app"
+    "test": "node --test test/*.test.mjs && npm test -w @steganoscope/app",
+    "check": "npm test && npm run typecheck -w @steganoscope/app"
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",

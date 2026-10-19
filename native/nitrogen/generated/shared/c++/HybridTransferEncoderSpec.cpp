@@ -7,7 +7,7 @@
 
 #include "HybridTransferEncoderSpec.hpp"
 
-namespace margelo::nitro::qretinanative {
+namespace margelo::nitro::steganoscopenative {
 
   void HybridTransferEncoderSpec::loadHybridMethods() {
     // load base methods/properties
@@ -22,4 +22,4 @@ namespace margelo::nitro::qretinanative {
     });
   }
 
-} // namespace margelo::nitro::qretinanative
+} // namespace margelo::nitro::steganoscopenative

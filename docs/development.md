@@ -7,10 +7,10 @@
 | `spec/steganoscope.yaml` | Protocol parameters and test vectors; the protocol identifier is derived from them |
 | `protocol/` | Reference implementation in plain JavaScript: containers and keys for the app; everything for the CLI and the tests |
 | `native/core/` | The transfer layer in C++, checked against the reference |
-| `native/` | `@qretina/native`: the C++ layer bound to the app with Nitro modules |
+| `native/` | `@steganoscope/native`: the C++ layer bound to the app with Nitro modules |
 | `app/` | The Expo app (Android and iOS) |
 | `tools/` | Command line, vector generator |
-| `site/` | qretina.app: download page and link association files |
+| `site/` | steganoscope.app: download page and link association files |
 | `docs/` | This documentation |
 | `test/` | Tests of the protocol, CLI and native core |
 
@@ -19,8 +19,8 @@
 ```
 npm install
 npm test                      # protocol, CLI, native core, app logic
-npm run typecheck -w @qretina/app
-npm run bundle -w @qretina/app  # Metro bundles for Android and iOS
+npm run typecheck -w @steganoscope/app
+npm run bundle -w @steganoscope/app  # Metro bundles for Android and iOS
 ```
 
 The native test compiles `native/core` with the system C++ compiler and runs it against
@@ -42,7 +42,7 @@ items. Set them in the environment to test signing and sealing.
 ## The native transfer layer
 
 `native/` is a Nitro module. `src/specs/Transfer.nitro.ts` declares what JavaScript sees, `npm run
-codegen -w @qretina/native` generates the bindings into `nitrogen/generated/` (committed), and
+codegen -w @steganoscope/native` generates the bindings into `nitrogen/generated/` (committed), and
 `cpp/HybridTransfer.cpp` implements them over `core/`. Expo links it into both platforms. The app
 runs on it only (`app/src/lib/engine.ts`); a build without it shows an error instead of starting.
 Expo Go cannot load it, so use a development build. The JavaScript reference stays for the CLI and
@@ -54,4 +54,4 @@ changing the spec, run the code generator; CI fails if the generated files are o
 ## Protocol changes
 
 Change `parameters` in `spec/steganoscope.yaml`, set `PROTOCOL` in `protocol/fountain.js` and
-`native/core/qretina.hpp` to the identifier the tests print, and regenerate the vectors.
+`native/core/steganoscope.hpp` to the identifier the tests print, and regenerate the vectors.

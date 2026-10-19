@@ -16,4 +16,4 @@ export function canonical(v) {
 }
 
 export const protocolId = (parameters = spec.parameters) =>
-  'QRT' + createHash('sha256').update(canonical(parameters)).digest('hex').slice(0, 6).toUpperCase();
+  'STG' + createHash('sha256').update(canonical(parameters)).digest('hex').slice(0, 6).toUpperCase();

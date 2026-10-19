@@ -87,10 +87,10 @@ A published APK must be signed with your own key. Create a keystore once and kee
 app signed with another key cannot update the installed one.
 
 ```
-keytool -genkeypair -v -keystore qretina.jks -alias qretina -keyalg RSA -keysize 4096 -validity 36500
-base64 -w0 qretina.jks | gh secret set ANDROID_KEYSTORE --env signing
+keytool -genkeypair -v -keystore steganoscope.jks -alias steganoscope -keyalg RSA -keysize 4096 -validity 36500
+base64 -w0 steganoscope.jks | gh secret set ANDROID_KEYSTORE --env signing
 gh secret set ANDROID_KEYSTORE_PASSWORD --env signing
-gh secret set ANDROID_KEY_ALIAS --env signing --body qretina
+gh secret set ANDROID_KEY_ALIAS --env signing --body steganoscope
 ```
 
 The workflow log prints the certificate's SHA-256 fingerprint. Set it as the `ANDROID_CERT_SHA256`

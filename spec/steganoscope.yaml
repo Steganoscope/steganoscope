@@ -1,6 +1,6 @@
 # Steganoscope transfer protocol: normative parameters.
 #
-# The protocol identifier is "QRT" followed by the first six hexadecimal digits, in upper case, of
+# The protocol identifier is "STG" followed by the first six hexadecimal digits, in upper case, of
 # SHA-256 over the canonical JSON (RFC 8785) of `parameters`. Any change to `parameters` gives a new
 # identifier, and receivers ignore frames that carry another one. Comments, formatting and
 # `vectors` do not enter the digest. The explanation of these parameters is in docs/protocol.md.
@@ -11,7 +11,7 @@ parameters:
   frame:
     grammar: # ABNF (RFC 5234)
       - frame     = protocol "/" stream-id "/" n "/" len "/" seed "/" symbol
-      - protocol  = "QRT" 6HEXDIG        ; upper case
+      - protocol  = "STG" 6HEXDIG        ; upper case
       - stream-id = 16HEXDIG             ; upper case
       - n         = 1*4DIGIT
       - len       = 1*7DIGIT
@@ -61,7 +61,7 @@ parameters:
         signature: >-
           Ed25519 over domain || everything after the signature, by a root key when cert-len is 0,
           otherwise by the certificate's key
-        domain: "qretina code\0"
+        domain: "steganoscope code\0"
       - tag: 2
         name: file
         layout: deflate-raw(meta LF bytes)
@@ -80,7 +80,7 @@ parameters:
         namespace: 1*64(ALPHA / DIGIT / "_" / "." / "-")
         key: the publisher's Ed25519 public key
         signature: Ed25519 over domain || everything after the signature, by a root key
-        domain: "qretina cert\0"
+        domain: "steganoscope cert\0"
         validity: not-before <= receiver's clock <= not-after, and serial not in the newest revocation list
       - tag: 5
         name: revocation-list
@@ -88,16 +88,16 @@ parameters:
         number: 1*15DIGIT ; a receiver keeps the list with the highest number
         serials: serial *(SP serial), or empty
         signature: Ed25519 over domain || everything after the signature, by a root key
-        domain: "qretina crl\0"
+        domain: "steganoscope crl\0"
       - tag: 6
         name: sealed
         layout: key-id(8) || nonce(24) || XChaCha20-Poly1305(enc-key, nonce, inner, ad = 0x06 || key-id)
         inner: a whole container of any type; at most two sealed layers
         key: 32 bytes, held in advance by sender and receiver
-        key-id: the first 8 bytes of SHA-256("qretina key\0" || key)
-        enc-key: HMAC-SHA-256(key, "qretina enc")
-        nonce: the first 24 bytes of HMAC-SHA-256(HMAC-SHA-256(key, "qretina iv"), inner)
-    passphrase-key: scrypt(UTF-8 passphrase, salt "qretina psk", N 32768, r 8, p 1, 32 bytes)
+        key-id: the first 8 bytes of SHA-256("steganoscope key\0" || key)
+        enc-key: HMAC-SHA-256(key, "steganoscope enc")
+        nonce: the first 24 bytes of HMAC-SHA-256(HMAC-SHA-256(key, "steganoscope iv"), inner)
+    passphrase-key: scrypt(UTF-8 passphrase, salt "steganoscope psk", N 32768, r 8, p 1, 32 bytes)
 
 vectors:
   mask:
@@ -108,18 +108,18 @@ vectors:
     - { text: "ietf!", base45: "QED8WEX0" }
     - { text: "base-45", base45: "UJCLQE7W581" }
     - { text: "Hello!!", base45: "%69 VD92EX0" }
-  stream: # the file container of "hello.txt" (text/plain, "Hello, QRetina!"), in blocks of at most 8 bytes
+  stream: # the file container of "hello.txt" (text/plain, "Hello, ResQR!"), in blocks of at most 8 bytes
     container: "022B49AD28D12FC849CCCC53C848CDC9C9D72BA928E1F200B1741482528B03831401"
     block: 8
     stream-id: "A124DF0DA9C7784A"
     frames: # seeds 1, 2, 3
-      - "QRT112C90/A124DF0DA9C7784A/5/34/1/+EJF2H02ED2"
-      - "QRT112C90/A124DF0DA9C7784A/5/34/2/U8A0H9/U721"
-      - "QRT112C90/A124DF0DA9C7784A/5/34/3/IPJG9QH39R1"
+      - "STG0D97A4/A124DF0DA9C7784A/5/34/1/+EJF2H02ED2"
+      - "STG0D97A4/A124DF0DA9C7784A/5/34/2/U8A0H9/U721"
+      - "STG0D97A4/A124DF0DA9C7784A/5/34/3/IPJG9QH39R1"
   sealed: # the stream container above, sealed under the key 0x42 repeated 32 times
     key: "4242424242424242424242424242424242424242424242424242424242424242"
-    key-id: "231EE7F1FF79FDFA"
-    container: "06231EE7F1FF79FDFA72CCAE76E667D161A3ADEA8CF62CD90ACAAA6A90628520D48FA2A8A97BA92264F01435B3BF4A93FDD38281940398905F277BCA285A41A7DE78DA6B29F1DBBA8F9190F62F4E91FF66DE73"
+    key-id: "1B9659E31976EA84"
+    container: "061B9659E31976EA8451F6A38E0B326C2844C8980BA9A5FE5A756F2681AF203F4D64607828E88881B4841A344C042BE5AECA777AE2C9C7A0B22CCC44049AC390456D1E452E57C5D22C5DCEE3E07928B5D987A4"
   passphrase-key:
     passphrase: "correct horse battery staple"
-    key: "9F60CB5ADB0FD8A41E2AE377EA703F46ED1616CD18ACD3A489247FFB301D85D5"
+    key: "13B944B6E0E91A5AC4B6F699AABBDBA83AE3B706BF3F2E19C0EBE566478E475F"
