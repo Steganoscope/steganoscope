@@ -25,8 +25,9 @@ cd app && npx expo run:android      # or run:ios, on macOS
 ## Status
 
 The protocol, command line and C++ core are tested in CI. The app runs its transfers on the C++ core;
-an Android release build passes its self-test on an emulator. It has not yet been tried on real
-phones or built for iOS, and files shared into the app from other apps arrive empty.
+an Android release build passes its self-test on an emulator, and an iOS release build passes it on a
+real iPhone (iOS 26.3, free Apple ID; see [Development](docs/development.md)). Transfer speed over the
+camera has not been measured yet, and files shared into the app from other apps arrive empty.
 
 ## Licence
 

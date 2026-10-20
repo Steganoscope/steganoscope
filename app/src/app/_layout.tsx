@@ -6,6 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { BusyProvider } from '../lib/busy.tsx';
 import { AppProvider } from '../lib/state.tsx';
+import { sharingEnabled } from '../lib/config.ts';
 import { engineError } from '../lib/engine.ts';
 import { Label, Screen, useColors } from '../components/ui.tsx';
 
@@ -22,7 +23,7 @@ export default function Layout() {
   return (
     <AppProvider>
       <BusyProvider>
-      <IncomingShare />
+      {sharingEnabled && <IncomingShare />}
       <StatusBar style="auto" />
       <Tabs screenOptions={{
         headerStyle: { backgroundColor: c.card }, headerTintColor: c.fg,
