@@ -72,5 +72,5 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       android: { enabled: true, singleShareMimeTypes: ['*/*'] },
     }],
   ],
-  extra: { rootKeys, appKeys, crl },
+  extra: { rootKeys, appKeys, crl, sharing: !personalTeam },
 });
