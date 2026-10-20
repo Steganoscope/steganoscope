@@ -2,13 +2,16 @@
 import Constants from 'expo-constants';
 import { b64url, loadKey, openContainer, type Crl } from '@steganoscope/protocol/containers.js';
 
-const extra = (Constants.expoConfig?.extra ?? {}) as { rootKeys?: string[]; appKeys?: string[]; crl?: string; sharing?: boolean };
+const extra = (Constants.expoConfig?.extra ?? {}) as { rootKeys?: string[]; appKeys?: string[]; crl?: string; sharing?: boolean; stats?: boolean };
 
 export const rootKeys = (extra.rootKeys ?? []).map(loadKey);
 export const appKeys = (extra.appKeys ?? []).map(b64url);
 
 // False in personal-team iOS builds, which have no App Group; expo-sharing throws without one.
 export const sharingEnabled = extra.sharing !== false;
+
+// Receive statistics for measuring transfers (STEGANOSCOPE_STATS=1 at build time).
+export const statsEnabled = extra.stats === true;
 
 // The revocation list shipped with this release, if a root key signed it.
 export const bundledCrl: Crl | undefined = (() => {
