@@ -5,6 +5,7 @@
 //                 sent is sealed with the first, and any of them opens what is received.
 //   STEGANOSCOPE_IOS_PERSONAL_TEAM set to 1 to build for an iPhone with a free Apple ID: a personal team cannot
 //                 sign Associated Domains or App Groups, so the countdown link and sharing into the app are left out.
+//   STEGANOSCOPE_STATS set to 1 to show receive statistics (codes per second, duplicates) on the Receive screen.
 //   STEGANOSCOPE_RELEASE set to 1 for store builds: the keys become mandatory and Android loses the
 //                 INTERNET permission, which only the development server needs.
 // The newest revocation list, when release/crl.bin exists (from certify.yml), ships with the app,
@@ -72,5 +73,5 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       android: { enabled: true, singleShareMimeTypes: ['*/*'] },
     }],
   ],
-  extra: { rootKeys, appKeys, crl, sharing: !personalTeam },
+  extra: { rootKeys, appKeys, crl, sharing: !personalTeam, stats: process.env.STEGANOSCOPE_STATS === '1' },
 });

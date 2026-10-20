@@ -45,6 +45,10 @@ A development build fetches its JavaScript from your computer over Wi-Fi, so the
 A VPN on the computer can block that. To skip the server, build the release configuration, which
 carries the JavaScript inside the app: `npx expo run:ios --device --configuration Release`.
 
+To measure a transfer, build with `STEGANOSCOPE_STATS=1`. The Receive screen then shows codes per second,
+duplicates and rank against n while a stream arrives, and a summary line when it completes.
+`node tools/steganoscope.mjs file <file> --gif out.gif --block 700 --fps 15` makes the animation to film.
+
 On an iPhone running iOS 26.3, Settings, Diagnostics passes every check, and the timing for
 1 MB is 0.27 s packing, 0.11 s codes and 0.03 s assembly (4 MB: 1.06 s, 1.02 s and 0.25 s).
 

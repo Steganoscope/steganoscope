@@ -7,6 +7,8 @@ import { Alert, View } from 'react-native';
 import type { Progress } from '@steganoscope/protocol/fountain.js';
 import { Button, Card, Label, Screen, kb, useColors } from '../components/ui.tsx';
 import { useBusy } from '../lib/busy.tsx';
+import { statsEnabled } from '../lib/config.ts';
+import { Stats } from '../lib/stats.ts';
 import type { Event } from '../lib/inbox.ts';
 import { useApp } from '../lib/state.tsx';
 import { approve, isApproved, withCrl } from '../lib/trust.ts';
@@ -19,6 +21,8 @@ export default function Receive() {
   const [streams, setStreams] = useState<Record<string, Stream>>({});
   const [last, setLast] = useState<string | null>(null);
   const assembling = useRef(false);
+  const stats = useRef(new Stats());
+  const [, redraw] = useState(0);
 
   const completed = useCallback((e: Event) => {
     if (e.kind === 'progress' || e.kind === 'ready') return;
@@ -39,8 +43,14 @@ export default function Receive() {
   const onCode = useCallback(({ data }: { data: string }) => {
     if (assembling.current) return;
     const e = app.inbox.push(data);
-    if (!e) return;
     const now = Date.now();
+    if (statsEnabled) {
+      const p = e && e.kind !== 'item' && e.kind !== 'error' ? e.progress : null;
+      stats.current.scan(now, p);
+      if (e?.kind === 'ready') { stats.current.finish(e.progress.id); console.log(stats.current.report()); }
+      redraw(x => x + 1);
+    }
+    if (!e) return;
     if (e.kind === 'progress') {
       setStreams(s => ({ ...s, [e.progress.id]: { ...e.progress, started: s[e.progress.id]?.started ?? now, updated: now } }));
       return;
@@ -85,6 +95,7 @@ export default function Receive() {
             </Card>
           );
         })}
+        {statsEnabled && <Label dim size={13}>{stats.current.live(Date.now()) ?? stats.current.report() ?? 'stats on: waiting for codes'}</Label>}
         {last && <Label dim size={14}>{last}</Label>}
       </View>
     </Screen>
