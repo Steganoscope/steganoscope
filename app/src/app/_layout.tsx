@@ -4,12 +4,24 @@ import Tabs from 'expo-router/js-tabs';
 import { useIncomingShare } from 'expo-sharing';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
+import { Pressable, Text } from 'react-native';
 import { BusyProvider } from '../lib/busy.tsx';
 import { AppProvider } from '../lib/state.tsx';
 import { engineError } from '../lib/engine.ts';
 import { Label, Screen, useColors } from '../components/ui.tsx';
 
 // Opens the share screen when another app shares a file to Steganoscope.
+// Leaves a running program. The tab bar is hidden there and iOS has no back button, so the header has one.
+function Close() {
+  const c = useColors();
+  return (
+    <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace('/library'))} accessibilityRole="button"
+      accessibilityLabel="Close program" hitSlop={12} style={{ paddingHorizontal: 16 }}>
+      <Text style={{ color: c.accent, fontSize: 17, fontWeight: '600' }}>Close</Text>
+    </Pressable>
+  );
+}
+
 function IncomingShare() {
   const { sharedPayloads } = useIncomingShare();
   useEffect(() => { if (sharedPayloads.length) router.push('/share'); }, [sharedPayloads]);
@@ -34,7 +46,7 @@ export default function Layout() {
         <Tabs.Screen name="library" options={{ title: 'Library' }} />
         <Tabs.Screen name="settings" options={{ title: 'Settings' }} />
         <Tabs.Screen name="item/[id]" options={{ href: null, title: 'Item' }} />
-        <Tabs.Screen name="run/[id]" options={{ href: null, title: 'Program', tabBarStyle: { display: 'none' } }} />
+        <Tabs.Screen name="run/[id]" options={{ href: null, title: 'Program', tabBarStyle: { display: 'none' }, headerLeft: () => <Close /> }} />
         <Tabs.Screen name="share" options={{ href: null, title: 'Shared file' }} />
         <Tabs.Screen name="diagnostics" options={{ href: null, title: 'Diagnostics' }} />
       </Tabs>
