@@ -8,3 +8,13 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # The Expo SDK pins these to the versions it was tested with (see expo/bundledNativeModules.json),
+    # so they move with the SDK, using `npx expo install --fix`, not one at a time.
+    ignore:
+      - dependency-name: react-native
+      - dependency-name: "@shopify/react-native-skia"
+      - dependency-name: react-native-screens
+      - dependency-name: react-native-safe-area-context
+      - dependency-name: react-native-reanimated
+      - dependency-name: react-native-worklets
+      - dependency-name: react-native-webview
