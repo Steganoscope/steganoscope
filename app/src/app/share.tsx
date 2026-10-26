@@ -8,9 +8,16 @@ import { Alert, ScrollView } from 'react-native';
 import { b64url, keyId } from '@steganoscope/protocol/containers.js';
 import { Button, Card, Label, kb, useColors } from '../components/ui.tsx';
 import { useBusy } from '../lib/busy.tsx';
+import { readShared } from '../lib/shared.ts';
 import { useApp } from '../lib/state.tsx';
 
 type Incoming = { uri: string; name: string; mime: string; size: number | null };
+
+// The file API first, then fetch, which reads file:// and content:// URIs through the platform's own loaders.
+const readers = [
+  async (uri: string) => new File(uri).bytes(),
+  async (uri: string) => new Uint8Array(await (await fetch(uri)).arrayBuffer()),
+];
 
 // A key file is small JSON holding a 32-byte key: { "label": "...", "key": "<base64url>" }.
 async function asKeyFile(f: Incoming) {
@@ -49,7 +56,7 @@ export default function Share() {
   async function broadcast() {
     if (!file) return;
     try {
-      const bytes = await new File(file.uri).bytes();
+      const bytes = await readShared(file.uri, file.size, readers);
       const id = await busy(`Preparing ${file.name} (${kb(bytes.length)})…`, () => app.addFile(file.name, file.mime, bytes));
       done('/broadcast', { id });
     } catch (e) {
